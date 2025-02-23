@@ -27,7 +27,7 @@ mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram]
 
 ## Стек технологий
 
-- Golang, Python, C#, C++, Assembler (RISC-V)
+- Golang, Python, Flask, FastAPI, C#, C++, Assembler (RISC-V)
 
 ## Проекты
 
