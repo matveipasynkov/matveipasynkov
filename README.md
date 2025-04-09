@@ -15,9 +15,9 @@ mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram]
 - Факультет компьютерных наук, ОП “Программная инженерия”, Бакалавриат.
 
 **Доп.образование**
-- Майнор "Интеллектуальный анализ данных" ВШЭ ФКН
-- Стартап-школа от Y Combinator
-- Курсы по Golang от PurpleSchool
+- Майнор "Интеллектуальный анализ данных" ВШЭ ФКН: https://electives.hse.ru/minor_intel/
+- Стартап-школа от Y Combinator: https://www.startupschool.org/
+- Курсы по Golang от PurpleSchool: https://purpleschool.ru/course/go-basics
 
 ## Опыт работы
 Меньше года в EdTech стартапе xieffect.ru. XiEffect - EdTech-проект для репетиторов и учителей, где реализуется платформа со всем нужным функционалом для преподавания: онлайн-доска, видеочат, мессенджер, личный кабинет с учениками и т.д.
