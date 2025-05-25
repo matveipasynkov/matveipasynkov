@@ -10,7 +10,9 @@ mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram]
 
 2019-2023, **Math and Science School No. 179 ([top-3 of Russian Math School's rating](https://ru.wikipedia.org/wiki/%D0%A8%D0%BA%D0%BE%D0%BB%D0%B0_%E2%84%96_179_(%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0)))**
 - Mathematics specialization (Calculous, Linear Algebra, Discrete Math, Algorithms).
-- Achievements: **Moscow Mathematical Olympiad** - Prize Winner, 3rd Degree Diploma, 2022, **MIPT's Olympiad in Mathematics** - Prize Winner, 2nd Degree Diploma, 2022; Prize Winner, 3rd Degree Diploma, 2023.
+- Achievements:
+  - **Moscow Mathematical Olympiad** - Prize Winner, 3rd Degree Diploma, 2022 **MIPT's Olympiad in Mathematics** - Prize Winner, 2nd Degree Diploma, 2022; Prize Winner, 3rd Degree Diploma, 2023,
+  - **full scholarship in HSE University.**
 
 **Additional Education**
 - Minor in "Data Mining" HSE Faculty of Computer Science: [https://electives.hse.ru/minor_intel/](https://electives.hse.ru/minor_intel/)
