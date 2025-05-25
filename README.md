@@ -22,7 +22,7 @@ mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram]
 
 ## Work Experience
 09.2024 - Present, [FCS HSE University](https://cs.hse.ru/en/about). [Teaching assistant](https://cs.hse.ru/initiative/2024/2025-2) for calculous and linear algebra. <br>
-02.2025 - Present, EdTech startup [xieffect](xieffect.ru). XiEffect is an EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc.
+02.2025 - Present, EdTech startup [xieffect](https://xieffect.ru). XiEffect is an EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc.
 
 ## Tech Stack
 
