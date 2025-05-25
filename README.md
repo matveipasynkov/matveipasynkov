@@ -31,14 +31,14 @@ mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram]
 ## Projects
 
 **Python**
-- **xieffect (Organization)**: An EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc. Project website: xieffect.ru
-- **PresentationAutoGeneration**: A mini-project implementing a program that generates and opens the latest slide in PowerPoint on macOS in real-time during a speaker's presentation. Utilized llama3.2 as an auxiliary neural network.
-- **Web-generator-Python**: A website for generating practice tests for algebra exams. Stack: Python, Flask, HTML, CSS.
+- **[xieffect (Organization)](https://github.com/xi-effect)**: An EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc. Project website: xieffect.ru
+- **[PresentationAutoGeneration](https://github.com/matveipasynkov/PresentationAutoGeneration)**: A mini-project implementing a program that generates and opens the latest slide in PowerPoint on macOS in real-time during a speaker's presentation. Utilized llama3.2 as an auxiliary neural network.
+- **[Web-generator-Python](https://github.com/matveipasynkov/Web-generator-Python)**: A website for generating practice tests for algebra exams. Stack: Python, Flask, HTML, CSS, JavaScript.
 
 **Golang**
-- **GoHTTP**: A test-covered CLI tool with parameters to fetch weather data via HTTP requests for a specified city (or auto-detected if not provided by the user).
-- **GoPassword**: A password manager featuring encryption, generation, local storage, and key-based access.
+- **[GoHTTP](https://github.com/matveipasynkov/GoHTTP)**: A test-covered CLI tool with parameters to fetch weather data via HTTP requests for a specified city (or auto-detected if not provided by the user).
+- **[GoPassword](https://github.com/matveipasynkov/GoPasswords)**: A password manager featuring encryption, generation, local storage, and key-based access.
 
 **C#**
-- **TelegramBotCSharp**: A Telegram bot that accepts data in JSON or CSV format, processes it, and outputs the result in JSON or CSV format.
-- **Patient-monitoring-system-Observer-pattern**: Implementation of a patient condition monitoring system using the Observer design pattern.
+- **[TelegramBotCSharp](https://github.com/matveipasynkov/TelegramBotCSharp)**: A Telegram bot that accepts data in JSON or CSV format, processes it, and outputs the result in JSON or CSV format.
+- **[Patient-monitoring-system-Observer-pattern](https://github.com/matveipasynkov/Patient-monitoring-system-Observer-pattern-)**: Implementation of a patient condition monitoring system using the Observer design pattern.
