@@ -4,13 +4,13 @@ mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram]
 
 ## Education
 
-**Secondary Education.** 2019-2023
-State Budgetary Educational Institution School No. 179.
-- Graduated in 2023, Mathematics specialization.
+2023 - Present, **Bachelor degree (in progress)**, National Research University Higher School of Economics (HSE University).
+- Computer Science Faculty, Bachelor's Program in Software Engineering **([top-1 Computer Science Program in Russia](https://cs.hse.ru/en/about))**.
+- Achievements: Top 4% of [program's rating](https://www.hse.ru/ba/se/ratings?course=1&from=913270764)
 
-**Higher Education.**
-National Research University Higher School of Economics (HSE University). 2023 - Present
-- Faculty of Computer Science, Bachelor's Program in Software Engineering.
+2019-2023, **Math and Science School No. 179 ([top-3 of Russian Math School's rating](https://ru.wikipedia.org/wiki/%D0%A8%D0%BA%D0%BE%D0%BB%D0%B0_%E2%84%96_179_(%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0)))**
+- Mathematics specialization (Calculous, Linear Algebra, Discrete Math, Algorithms).
+- Achievements: **Moscow Mathematical Olympiad** - Prize Winner, 3rd Degree Diploma, 2022, **MIPT's Olympiad in Mathematics** - Prize Winner, 2nd Degree Diploma, 2022; Prize Winner, 3rd Degree Diploma, 2023.
 
 **Additional Education**
 - Minor in "Data Mining" HSE Faculty of Computer Science: [https://electives.hse.ru/minor_intel/](https://electives.hse.ru/minor_intel/)
@@ -19,16 +19,8 @@ National Research University Higher School of Economics (HSE University). 2023 -
 - "Product Management" Course by VK Education: [https://education.vk.company/curriculum/certificates/download/77338/78df5c24-092b-4b48-84e8-6071b42fdb23/](https://education.vk.company/curriculum/certificates/download/77338/78df5c24-092b-4b48-84e8-6071b42fdb23/)
 
 ## Work Experience
-Less than a year at EdTech startup xieffect.ru. XiEffect is an EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc.
-
-## Olympiad Experience
-
-**Moscow Mathematical Olympiad**
-- Prize Winner, 3rd Degree Diploma, 2022.
-
-**MIPT's Olympiad in Mathematics**
-- Prize Winner, 2nd Degree Diploma, 2022.
-- Prize Winner, 3rd Degree Diploma, 2023.
+09.2024 - Present, [FCS HSE University](https://cs.hse.ru/en/about). [Teaching assistant](https://cs.hse.ru/initiative/2024/2025-2) for calculous and linear algebra. <br>
+02.2025 - Present, EdTech startup [xieffect](xieffect.ru). XiEffect is an EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc.
 
 ## Tech Stack
 
