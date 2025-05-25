@@ -1,62 +1,50 @@
-# Матвей Пасынков
+# Matvei Pasynkov
 
 mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram](https://t.me/matveipasynkov)
 
-## Образование
+## Education
 
-**Среднее образование.** 2019-2023 гг.
-ГБОУ Школа № 179.
+**Secondary Education.** 2019-2023
+State Budgetary Educational Institution School No. 179.
+- Graduated in 2023, Mathematics specialization.
 
-- Выпустился в 2023 году, математический класс.
+**Higher Education.**
+National Research University Higher School of Economics (HSE University). 2023 - Present
+- Faculty of Computer Science, Bachelor's Program in Software Engineering.
 
-**Высшее образование.**
-Национальный исследовательский университет “Высшая школа экономики”. 2023 - по н.в.
+**Additional Education**
+- Minor in "Data Mining" HSE Faculty of Computer Science: [https://electives.hse.ru/minor_intel/](https://electives.hse.ru/minor_intel/)
+- Startup School by Y Combinator: [https://www.startupschool.org/](https://www.startupschool.org/)
+- Golang Courses by PurpleSchool: [https://purpleschool.ru/course/go-basics](https://purpleschool.ru/course/go-basics)
+- "Product Management" Course by VK Education: [https://education.vk.company/curriculum/certificates/download/77338/78df5c24-092b-4b48-84e8-6071b42fdb23/](https://education.vk.company/curriculum/certificates/download/77338/78df5c24-092b-4b48-84e8-6071b42fdb23/)
 
-- Факультет компьютерных наук, ОП “Программная инженерия”, Бакалавриат.
+## Work Experience
+Less than a year at EdTech startup xieffect.ru. XiEffect is an EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc.
 
-**Доп.образование**
-- Майнор "Интеллектуальный анализ данных" ВШЭ ФКН: https://electives.hse.ru/minor_intel/
-- Стартап-школа от Y Combinator: https://www.startupschool.org/
-- Курсы по Golang от PurpleSchool: https://purpleschool.ru/course/go-basics
-- Курс "Продукт-менеджмент" от VK Education: https://education.vk.company/curriculum/certificates/download/77338/78df5c24-092b-4b48-84e8-6071b42fdb23/
+## Olympiad Experience
 
-## Опыт работы
-Меньше года в EdTech стартапе xieffect.ru. XiEffect - EdTech-проект для репетиторов и учителей, где реализуется платформа со всем нужным функционалом для преподавания: онлайн-доска, видеочат, мессенджер, личный кабинет с учениками и т.д.
+**Moscow Mathematical Olympiad**
+- Prize Winner, 3rd Degree Diploma, 2022.
 
-## Олимпиадный опыт
+**MIPT's Olympiad in Mathematics**
+- Prize Winner, 2nd Degree Diploma, 2022.
+- Prize Winner, 3rd Degree Diploma, 2023.
 
-**Московская математическая олимпиада**
-
-- Призёр, диплом III степени, 2022 год.
-
-**Олимпиада “Физтех” по математике**
-
-- Призёр, диплом II степени, 2022 год.
-- Призёр, диплом III степени, 2023 год.
-
-## Стек технологий
+## Tech Stack
 
 - Golang, Python, Flask, FastAPI, C#, C++, Assembler (RISC-V), PostgreSQL, SQLAlchemy, Alembic, Docker.
 
-## Проекты
+## Projects
 
 **Python**
-
-- **xieffect (Организация)** EdTech-проект для репетиторов и учителей, где реализуется платформа со всем нужным функционалом для преподавания: онлайн-доска, видеочат, мессенджер, личный кабинет с учениками и т.д. Сайт проекта: xieffect.ru
-- **PresentationAutoGeneration** В данном мини-проекте была реализована программа, которая во время речи докладчика сразу генерирует и открывает последний сгенерированный слайд в PowerPoint на MacOS. Вспомогательная нейросеть - llama3.2.
-- **Web-generator-Python** - Сайт для генерации тренировочных вариантов для экзамена по алгебре. Стек: Python,
-    Flask, HTML, CSS.
+- **xieffect (Organization)**: An EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc. Project website: xieffect.ru
+- **PresentationAutoGeneration**: A mini-project implementing a program that generates and opens the latest slide in PowerPoint on macOS in real-time during a speaker's presentation. Utilized llama3.2 as an auxiliary neural network.
+- **Web-generator-Python**: A website for generating practice tests for algebra exams. Stack: Python, Flask, HTML, CSS.
 
 **Golang**
+- **GoHTTP**: A test-covered CLI tool with parameters to fetch weather data via HTTP requests for a specified city (or auto-detected if not provided by the user).
+- **GoPassword**: A password manager featuring encryption, generation, local storage, and key-based access.
 
-- **GoHTTP.** CLI с параметрами, позволяющую получить погоду с помощью HTTP запросов в заданном городе
-    (или с помощью самоопределения, если он не указан пользователем) и покрытая тестами.
-- **GoPassword** Менеджер паролей с шифрованием, генерацией, локальным хранилищем и доступом по ключу.
-
-**С#**
-
-- **TelegramBotCSharp.** Телеграм-бот, который принимает на вход данные в JSON или CSV формате, проводит их
-    обработку и выводит результат в JSON или CSV формате.
-- **Patient-monitoring-system-Observer-pattern-.** Реализация мониторинга состояния пациентов.
-
-
+**C#**
+- **TelegramBotCSharp**: A Telegram bot that accepts data in JSON or CSV format, processes it, and outputs the result in JSON or CSV format.
+- **Patient-monitoring-system-Observer-pattern**: Implementation of a patient condition monitoring system using the Observer design pattern.
