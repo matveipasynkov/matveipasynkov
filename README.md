@@ -21,8 +21,8 @@ mepasynkov@edu.hse.ru | [GitHub](https://github.com/matveipasynkov) | [Telegram]
 - "Product Management" Course by VK Education: [https://education.vk.company/curriculum/certificates/download/77338/78df5c24-092b-4b48-84e8-6071b42fdb23/](https://education.vk.company/curriculum/certificates/download/77338/78df5c24-092b-4b48-84e8-6071b42fdb23/)
 
 ## Work Experience
-09.2024 - Present, [FCS HSE University](https://cs.hse.ru/en/about). [Teaching assistant](https://cs.hse.ru/initiative/2024/2025-2) for calculous and linear algebra. <br>
-02.2025 - Present, EdTech startup [xieffect](https://xieffect.ru). XiEffect is an EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc.
+09.2024 - 06.2025, [FCS HSE University](https://cs.hse.ru/en/about). [Teaching assistant](https://cs.hse.ru/initiative/2024/2025-2) for calculous and linear algebra. <br>
+01.2024 - 06.2025, EdTech startup [xieffect](https://xieffect.ru). XiEffect is an EdTech project for tutors and teachers, developing a platform with all necessary teaching functionalities: online whiteboard, video chat, messenger, personal accounts for students, etc.
 
 ## Tech Stack
 
