@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="description" content="Матвей Пасынков — Project Manager @ hh.ru. Резюме в виде рабочего стола macOS." />
+<title>Матвей Пасынков — macOS</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ================================================================ RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* macOS Sonoma-ish wallpaper tones */
+  --wall-1:#2b1f5e;
+  --wall-2:#3d2b8c;
+  --wall-3:#1d4e8c;
+  --wall-4:#b14a8c;
+  /* glass surfaces */
+  --glass:rgba(255,255,255,.62);
+  --glass-strong:rgba(255,255,255,.78);
+  --glass-border:rgba(255,255,255,.45);
+  --glass-shadow:0 24px 70px -12px rgba(20,12,60,.55),0 8px 24px -8px rgba(20,12,60,.4);
+  --bar:rgba(255,255,255,.22);
+  --bar-border:rgba(255,255,255,.28);
+  --titlebar:rgba(245,245,250,.55);
+  /* ink */
+  --ink:#1c1c2e;
+  --ink-2:#3a3a52;
+  --muted:#6b6b85;
+  --dim:#9494ad;
+  --line:rgba(0,0,0,.1);
+  --accent:#0a84ff;          /* macOS blue */
+  --accent-2:#5e5ce6;        /* macOS indigo */
+  --red:#ff5f57; --yellow:#febc2e; --green:#28c840;
+  /* geometry */
+  --radius:12px;
+  --radius-lg:16px;
+  --ease:cubic-bezier(.2,.75,.34,.94);
+  --spring:cubic-bezier(.34,1.56,.64,1);
+  --font:'Inter',-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+html,body{height:100%}
+body{
+  font-family:var(--font);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow:hidden;                 /* the desktop never scrolls */
+  user-select:none;
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:default}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+::selection{background:rgba(10,132,255,.25)}
+
+/* ================================================================ DESKTOP / WALLPAPER */
+#desktop{
+  position:fixed;inset:0;overflow:hidden;
+  background:
+    radial-gradient(120% 100% at 80% 0%, var(--wall-4) 0%, transparent 45%),
+    radial-gradient(140% 120% at 15% 20%, var(--wall-2) 0%, transparent 55%),
+    radial-gradient(120% 120% at 60% 100%, var(--wall-3) 0%, transparent 60%),
+    linear-gradient(160deg, var(--wall-1) 0%, #1a1640 100%);
+}
+/* soft aurora blobs drifting */
+.aurora{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;mix-blend-mode:screen;pointer-events:none}
+.aurora.a1{width:60vmin;height:60vmin;left:-10vmin;top:-10vmin;background:radial-gradient(circle,#7d6cff,transparent 62%)}
+.aurora.a2{width:55vmin;height:55vmin;right:-8vmin;top:8vh;background:radial-gradient(circle,#3da5ff,transparent 62%)}
+.aurora.a3{width:50vmin;height:50vmin;left:35vmin;bottom:-20vmin;background:radial-gradient(circle,#ff6fae,transparent 62%)}
+@keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(4vmin,3vmin)}}
+@keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-3vmin,-4vmin)}}
+.aurora.a1{animation:drift1 22s ease-in-out infinite}
+.aurora.a2{animation:drift2 28s ease-in-out infinite}
+
+/* ================================================================ MENU BAR */
+#menubar{
+  position:fixed;top:0;left:0;right:0;height:28px;z-index:9000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 12px;
+  background:var(--bar);backdrop-filter:blur(22px) saturate(180%);-webkit-backdrop-filter:blur(22px) saturate(180%);
+  border-bottom:1px solid var(--bar-border);
+  font-size:13px;color:#fff;font-weight:500;
+  text-shadow:0 1px 2px rgba(0,0,0,.25);
+}
+.mb-left,.mb-right{display:flex;align-items:center;gap:16px}
+.mb-logo{width:15px;height:15px;display:flex;align-items:center;justify-content:center;opacity:.95}
+.mb-logo svg{width:100%;height:100%}
+.mb-app{font-weight:700;font-size:13px}
+.mb-menu{display:flex;gap:14px}
+.mb-menu span{font-weight:500;opacity:.92;padding:2px 4px;border-radius:5px;transition:background .15s}
+.mb-menu span:hover{background:rgba(255,255,255,.18)}
+.mb-right{gap:12px;font-variant-numeric:tabular-nums}
+.mb-right svg{width:15px;height:15px;opacity:.95}
+.mb-clock{font-weight:500;min-width:130px;text-align:right}
+/* lang toggle inside menu bar */
+.mb-lang{display:inline-flex;gap:0;background:rgba(255,255,255,.14);border-radius:7px;padding:1px}
+.mb-lang button{color:#fff;font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;letter-spacing:.04em}
+.mb-lang button.active{background:rgba(255,255,255,.9);color:var(--ink);text-shadow:none}
+@media (max-width:640px){
+  .mb-menu,.mb-logo{display:none}
+  .mb-clock{min-width:96px;font-size:11px}
+}
+
+/* ================================================================ WINDOWS */
+#windows{position:absolute;inset:28px 0 0 0;pointer-events:none}
+.win{
+  position:absolute;pointer-events:auto;
+  min-width:300px;min-height:200px;
+  background:var(--glass);
+  backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);
+  border:.5px solid var(--glass-border);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--glass-shadow);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  transform-origin:center bottom;
+  transition:box-shadow .2s var(--ease);
+}
+.win.opening{animation:win-open .35s var(--spring)}
+.win.closing{animation:win-close .2s var(--ease) forwards}
+@keyframes win-open{from{opacity:0;transform:scale(.86) translateY(24px)}to{opacity:1;transform:none}}
+@keyframes win-close{to{opacity:0;transform:scale(.92) translateY(12px)}}
+.win.minimizing{animation:win-min .3s var(--ease) forwards}
+@keyframes win-min{to{opacity:0;transform:scale(.2) translateY(60vh)}}
+.win.active{box-shadow:0 30px 90px -10px rgba(20,12,60,.7),0 10px 30px -8px rgba(20,12,60,.5)}
+
+/* title bar */
+.titlebar{
+  height:38px;flex-shrink:0;
+  display:flex;align-items:center;
+  padding:0 12px;gap:10px;
+  background:var(--titlebar);
+  border-bottom:1px solid var(--line);
+  position:relative;
+  cursor:default;
+}
+.tlights{display:flex;gap:8px;align-items:center;flex-shrink:0}
+.tlight{width:12px;height:12px;border-radius:50%;border:.5px solid rgba(0,0,0,.14);
+  display:flex;align-items:center;justify-content:center;opacity:1}
+.tlight.close{background:var(--red)} .tlight.min{background:var(--yellow)} .tlight.max{background:var(--green)}
+.tlight svg{width:7px;height:7px;opacity:0;color:rgba(0,0,0,.55)}
+.tlights:hover .tlight svg{opacity:1}
+.ttitle{position:absolute;left:0;right:0;text-align:center;font-size:13px;font-weight:600;color:var(--ink-2);
+  pointer-events:none;text-wrap:nowrap;overflow:hidden;text-overflow:ellipsis}
+.titlebar-spacer{margin-left:auto}
+
+/* window body */
+.win-body{flex:1;overflow:auto;position:relative}
+.win-body::-webkit-scrollbar{width:10px}
+.win-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.22);border-radius:5px;border:3px solid transparent;background-clip:content-box}
+
+/* maximized */
+.win.maximized{transition:left .25s var(--ease),top .25s var(--ease),width .25s var(--ease),height .25s var(--ease)}
+.win.dragging{transition:none}
+
+/* ================================================================ ABOUT APP */
+.about{display:flex;height:100%}
+.about-side{
+  width:172px;flex-shrink:0;background:rgba(255,255,255,.32);
+  border-right:1px solid var(--line);padding:14px 8px;display:flex;flex-direction:column;gap:2px;
+}
+.aside-item{
+  display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;
+  font-size:13px;font-weight:500;color:var(--ink-2);cursor:default;transition:background .12s;
+}
+.aside-item svg{width:15px;height:15px;flex-shrink:0;opacity:.8}
+.aside-item:hover{background:rgba(0,0,0,.06)}
+.aside-item.active{background:var(--accent);color:#fff}
+.aside-item.active svg{opacity:1}
+.about-main{flex:1;overflow:auto;padding:28px 32px;min-width:0}
+.about-main::-webkit-scrollbar{width:10px}
+.about-main::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18);border-radius:5px}
+.tab{display:none}
+.tab.active{display:block;animation:tab-in .25s var(--ease)}
+@keyframes tab-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* profile tab */
+.profile-head{display:flex;align-items:center;gap:18px;margin-bottom:22px}
+.avatar{
+  width:74px;height:74px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,#7d6cff,#3da5ff);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:26px;letter-spacing:-.02em;
+  box-shadow:0 6px 20px -6px rgba(61,165,255,.6);
+}
+.profile-head h1{font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.profile-role{font-size:14px;color:var(--muted);margin-top:3px}
+.profile-role b{color:var(--accent);font-weight:600}
+.lead{color:var(--ink-2);font-size:14px;line-height:1.55;max-width:62ch}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:22px}
+.stat{background:rgba(255,255,255,.4);border:1px solid var(--line);border-radius:10px;padding:14px 12px;text-align:center}
+.stat .num{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--accent-2)}
+.stat .lbl{font-size:11px;color:var(--muted);margin-top:3px}
+
+/* experience */
+.exp{margin-bottom:20px}
+.exp-card{background:rgba(255,255,255,.45);border:1px solid var(--line);border-radius:12px;padding:18px 18px;margin-bottom:12px}
+.exp-card.feature{border-color:rgba(10,132,255,.35);background:linear-gradient(180deg,rgba(10,132,255,.08),rgba(255,255,255,.45))}
+.exp-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.exp-logo{width:38px;height:38px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;background:linear-gradient(135deg,#ff5f57,#febc2e)}
+.exp-logo.alt{background:rgba(0,0,0,.08);color:var(--ink)}
+.exp-logo.hh{background:linear-gradient(135deg,#d6001c,#ff5050)}
+.exp-meta h3{font-size:16px;font-weight:600;line-height:1.2}
+.exp-co{font-size:13px;color:var(--accent)}
+.exp-tag{margin-left:auto;font-family:var(--mono);font-size:11px;color:var(--muted);
+  background:rgba(0,0,0,.06);padding:3px 9px;border-radius:99px}
+.exp-period{font-family:var(--mono);font-size:11px;color:var(--dim);margin:2px 0 10px}
+.bullets{list-style:none;display:flex;flex-direction:column;gap:6px}
+.bullets li{font-size:13px;color:var(--ink-2);line-height:1.5;padding-left:16px;position:relative}
+.bullets li::before{content:'';position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.todo{color:var(--accent-2);font-weight:600}
+
+/* skills */
+.skill-group{margin-bottom:18px}
+.gname{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:12px;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.5);
+  border:1px solid var(--line);color:var(--ink-2);transition:background .12s,border-color .12s}
+.chip:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* education timeline */
+.timeline{position:relative;padding-left:22px}
+.timeline::before{content:'';position:absolute;left:5px;top:4px;bottom:4px;width:2px;background:linear-gradient(var(--accent),var(--accent-2),transparent)}
+.tl-item{position:relative;padding-bottom:22px}
+.tl-item::before{content:'';position:absolute;left:-21px;top:4px;width:11px;height:11px;border-radius:50%;
+  background:#fff;border:2px solid var(--accent);box-shadow:0 0 0 3px rgba(10,132,255,.18)}
+.tl-when{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.tl-item h4{font-size:15px;font-weight:600;margin:3px 0}
+.tl-item p{font-size:13px;color:var(--muted);line-height:1.5}
+.awards{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.award{font-size:12px;padding:6px 11px;border-radius:8px;background:rgba(255,255,255,.5);border:1px solid var(--line);color:var(--ink-2)}
+.award .m{margin-right:4px}
+
+@media (max-width:760px){
+  .about{flex-direction:column}
+  .about-side{width:auto;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--line);padding:8px}
+  .aside-item{white-space:nowrap}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ================================================================ TERMINAL */
+.terminal{height:100%;background:rgba(28,22,42,.92);color:#e7e7f0;font-family:var(--mono);
+  font-size:13px;line-height:1.55;padding:14px 16px;overflow:auto;-webkit-backdrop-filter:blur(20px)}
+.terminal .ln{white-space:pre-wrap;word-break:break-word}
+.terminal .prompt{color:#5fff9b}
+.terminal .user{color:#5fbaff}
+.terminal .at,.terminal .host{color:#c9a3ff}
+.terminal .path{color:#febc6e}
+.terminal .err{color:#ff7a7a}
+.terminal .dim{color:#9494ad}
+.terminal .ok{color:#5fff9b}
+.term-input-line{display:flex;align-items:baseline;gap:0}
+.term-input{flex:1;background:none;border:none;color:#e7e7f0;font-family:var(--mono);font-size:13px;outline:none;caret-color:#5fff9b}
+.terminal .cursor{display:inline-block;width:8px;height:15px;background:#5fff9b;vertical-align:text-bottom;animation:term-blink 1s step-end infinite}
+@keyframes term-blink{50%{opacity:0}}
+
+/* ================================================================ CONTACTS */
+.contacts{display:flex;height:100%}
+.c-list{width:180px;flex-shrink:0;background:rgba(255,255,255,.3);border-right:1px solid var(--line);overflow:auto;padding:8px}
+.c-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px;cursor:default;transition:background .12s}
+.c-item:hover{background:rgba(0,0,0,.06)}
+.c-item.active{background:var(--accent);color:#fff}
+.c-item .ci-ic{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;flex-shrink:0}
+.c-item .ci-ic svg{width:15px;height:15px}
+.c-item .ci-n{font-size:13px;font-weight:500}
+.c-detail{flex:1;padding:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px}
+.c-detail .avatar{width:90px;height:90px;font-size:32px;margin-bottom:8px}
+.c-detail h2{font-size:21px;font-weight:700}
+.c-detail .role{font-size:13px;color:var(--muted)}
+.c-row{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:13px;color:var(--ink-2);
+  background:rgba(255,255,255,.5);border:1px solid var(--line);padding:9px 14px;border-radius:10px;cursor:default;transition:background .12s}
+.c-row:hover{background:#fff}
+.c-row svg{width:15px;height:15px;color:var(--accent)}
+.c-row .v{font-family:var(--mono);font-size:12px}
+.c-row .copy-hint{font-size:11px;color:var(--dim);margin-left:auto}
+@media (max-width:640px){ .c-list{width:130px} .c-detail{padding:18px} }
+
+/* ================================================================ DOCK */
+#dock-wrap{position:fixed;bottom:6px;left:0;right:0;display:flex;justify-content:center;z-index:8000;pointer-events:none}
+#dock{
+  pointer-events:auto;
+  display:flex;align-items:flex-end;gap:6px;
+  padding:7px 8px;
+  background:var(--bar);backdrop-filter:blur(26px) saturate(180%);-webkit-backdrop-filter:blur(26px) saturate(180%);
+  border:.5px solid var(--bar-border);
+  border-radius:20px;
+  box-shadow:0 12px 40px -8px rgba(20,12,60,.5);
+}
+.dock-item{
+  position:relative;width:50px;height:50px;border-radius:12px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .18s var(--spring),margin .18s var(--spring);
+  transform-origin:bottom center;
+}
+.dock-item svg.ic{width:40px;height:40px;display:block;filter:drop-shadow(0 3px 5px rgba(0,0,0,.25))}
+.dock-item:hover{transform:scale(1.45) translateY(-8px)}
+.dock-item .tip{position:absolute;bottom:64px;left:50%;transform:translateX(-50%) scale(.9);
+  background:rgba(40,32,60,.92);color:#fff;font-size:12px;padding:4px 10px;border-radius:7px;
+  white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s,transform .15s}
+.dock-item:hover .tip{opacity:1;transform:translateX(-50%) scale(1)}
+.dock-item .dot{position:absolute;bottom:-3px;left:50%;transform:translateX(-50%);width:4px;height:4px;border-radius:50%;background:var(--ink-2);opacity:0}
+.dock-item.running .dot{opacity:1}
+.dock-item.bouncing{animation:dock-bounce .5s var(--ease)}
+@keyframes dock-bounce{0%,100%{transform:translateY(0)}40%{transform:translateY(-22px)}}
+.dock-sep{width:.5px;height:38px;background:rgba(255,255,255,.4);margin:0 4px;align-self:center}
+@media (max-width:560px){ .dock-item{width:42px;height:42px} .dock-item svg.ic{width:33px;height:33px} }
+
+/* ================================================================ TOAST */
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);
+  background:rgba(40,32,60,.94);color:#fff;padding:10px 18px;border-radius:99px;font-size:13px;
+  z-index:9500;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s var(--ease);
+  box-shadow:0 10px 30px -6px rgba(0,0,0,.4)}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ================================================================ BOOT BANNER */
+#boot{position:fixed;inset:0;z-index:10000;background:#1a1640;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:24px;transition:opacity .6s var(--ease)}
+#boot.hide{opacity:0;pointer-events:none}
+#boot .blogo{width:60px;height:60px;opacity:.9}
+#boot .bbar{width:160px;height:3px;background:rgba(255,255,255,.18);border-radius:2px;overflow:hidden}
+#boot .bbar i{display:block;height:100%;width:0;background:#fff;animation:boot 1.4s var(--ease) forwards}
+@keyframes boot{to{width:100%}}
+/* power-off state: black screen with the Apple logo, no progress bar */
+#boot.powering .bbar{display:none}
+#boot.powering .blogo{animation:apple-fade .9s ease-in-out}
+@keyframes apple-fade{0%{opacity:1}100%{opacity:.35}}
+
+/* ================================================================ LOCK SCREEN (login) */
+#lockscreen{
+  position:fixed;inset:0;z-index:10001;display:none;
+  flex-direction:column;align-items:center;justify-content:center;gap:18px;
+  background:linear-gradient(160deg,#1a1640 0%,#2b1f5e 45%,#1d4e8c 100%);
+  transition:opacity .4s var(--ease), backdrop-filter .4s}
+#lockscreen.show{display:flex;animation:lock-in .5s var(--ease)}
+#lockscreen.fade{opacity:0;pointer-events:none}
+@keyframes lock-in{from{opacity:0}to{opacity:1}}
+#lockscreen::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(80% 60% at 50% 0%,rgba(125,108,255,.25),transparent 60%);pointer-events:none}
+.lock-clock{position:absolute;top:8%;text-align:center;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+.lock-clock .lc-time{font-size:clamp(48px,9vw,96px);font-weight:300;letter-spacing:-.02em;line-height:1}
+.lock-clock .lc-date{font-size:clamp(14px,2.4vw,22px);font-weight:500;opacity:.9;margin-top:6px}
+.lock-avatar{width:96px;height:96px;border-radius:50%;
+  background:linear-gradient(135deg,#7d6cff,#3da5ff);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;
+  font-size:34px;letter-spacing:-.02em;box-shadow:0 10px 40px -8px rgba(61,165,255,.7)}
+.lock-name{color:#fff;font-size:22px;font-weight:600;text-shadow:0 2px 8px rgba(0,0,0,.4)}
+.lock-pw{display:flex;flex-direction:column;align-items:center;gap:11px}
+.lock-pw input{
+  width:240px;padding:9px 16px;border-radius:10px;text-align:center;
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+  color:#fff;font-size:15px;outline:none;backdrop-filter:blur(10px);transition:background .15s,border-color .15s}
+.lock-pw input::placeholder{color:rgba(255,255,255,.55)}
+.lock-pw input:focus{background:rgba(255,255,255,.24);border-color:rgba(255,255,255,.5)}
+.lock-pw button{
+  width:42px;height:42px;border-radius:50%;border:none;cursor:default;
+  background:rgba(255,255,255,.2);color:#fff;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,transform .15s}
+.lock-pw button:hover{background:rgba(255,255,255,.34)}
+.lock-pw button:active{transform:scale(.92)}
+.lock-pw button svg{width:18px;height:18px}
+.lock-hint{color:rgba(255,255,255,.55);font-size:12px;margin-top:2px}
+.lock-shake{animation:lock-shake .4s}
+@keyframes lock-shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* ================================================================ POWER CONFIRM OVERLAY */
+#power-overlay{
+  position:fixed;inset:0;z-index:10002;display:none;align-items:center;justify-content:center;
+  background:rgba(0,0,0,.45);backdrop-filter:blur(6px);
+  transition:opacity .25s var(--ease)}
+#power-overlay.show{display:flex;animation:lock-in .2s var(--ease)}
+.power-box{
+  background:rgba(245,245,250,.92);backdrop-filter:blur(40px) saturate(180%);-webkit-backdrop-filter:blur(40px) saturate(180%);
+  border:.5px solid rgba(0,0,0,.12);border-radius:14px;padding:22px;width:min(340px,86vw);
+  box-shadow:0 24px 70px -12px rgba(0,0,0,.5);text-align:center;color:var(--ink)}
+.power-box h3{font-size:15px;font-weight:600;margin-bottom:4px}
+.power-box p{font-size:12px;color:var(--muted);margin-bottom:16px}
+.power-btns{display:flex;gap:8px}
+.power-btn{flex:1;padding:9px 8px;border-radius:9px;font-size:13px;font-weight:500;cursor:default;
+  border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.7);color:var(--ink-2);transition:background .12s}
+.power-btn:hover{background:#fff}
+.power-btn.danger{background:#ff3b30;color:#fff;border-color:transparent}
+.power-btn.danger:hover{background:#ff5f57}
+.power-btn.primary{background:var(--accent);color:#fff;border-color:transparent}
+
+/* reduced motion */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+}
+
+/* ================================================================ PRINT */
+/* ================================================================ MENUBAR DROPDOWN MENUS */
+.mb-menu{display:flex;gap:2px;position:relative}
+.mb-menu-btn{color:#fff;font-weight:500;font-size:13px;padding:3px 9px;border-radius:6px;
+  background:none;border:none;cursor:default;transition:background .12s;text-shadow:0 1px 2px rgba(0,0,0,.25)}
+.mb-menu-btn:hover,.mb-menu-btn.open{background:rgba(255,255,255,.2)}
+/* Apple-logo menu button: tighter, no text, just the glyph */
+.mb-menu-btn.mb-logo-btn{padding:4px 8px;display:flex;align-items:center}
+.mb-menu-btn.mb-logo-btn svg{width:15px;height:15px}
+.mb-dropdown{
+  position:absolute;top:100%;left:0;min-width:230px;margin-top:4px;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(30px) saturate(180%);-webkit-backdrop-filter:blur(30px) saturate(180%);
+  border:.5px solid rgba(0,0,0,.12);border-radius:10px;
+  box-shadow:0 14px 40px -8px rgba(0,0,0,.35);
+  padding:5px;color:var(--ink);font-size:13px;text-shadow:none;font-weight:400;
+  display:none;z-index:9500;animation:dd-in .12s var(--ease)}
+@keyframes dd-in{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.mb-menu-btn.open + .mb-dropdown{display:block}
+.mb-dd-item{display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:6px 12px;border-radius:6px;cursor:default;color:var(--ink-2)}
+.mb-dd-item:hover{background:var(--accent);color:#fff}
+.mb-dd-item:disabled,.mb-dd-item.disabled{opacity:.4;cursor:default}
+.mb-dd-item:disabled:hover,.mb-dd-item.disabled:hover{background:none;color:var(--ink-2)}
+.mb-dd-item .kbd{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.mb-dd-item:hover .kbd{color:rgba(255,255,255,.8)}
+.mb-dd-sep{height:1px;background:rgba(0,0,0,.1);margin:5px 8px}
+.mb-dd-item .chk{color:var(--accent);font-weight:700}
+@media (prefers-reduced-motion:reduce){ .mb-dropdown{animation:none} }
+
+/* ================================================================ PRINT-ONLY DOCUMENT */
+/* Hidden on screen; only #print-doc is shown when printing. Produces a clean,
+   one-flow, recruiter-ready PDF — no desktop chrome, no duplicated tabs. */
+#print-doc{display:none}
+@media print{
+  /* hide the entire desktop UI */
+  #menubar,#dock-wrap,#boot,.aurora,#toast,#desktop,#windows{display:none!important}
+  body,#desktop{overflow:visible!important;background:#fff!important;height:auto!important}
+  body{color:#111!important}
+  #print-doc{display:block!important;padding:0 8mm;color:#111;font-size:10.5pt;line-height:1.5}
+  #print-doc .pd-head{display:flex;justify-content:space-between;align-items:flex-start;
+    border-bottom:2px solid #111;padding-bottom:10px;margin-bottom:14px}
+  #print-doc .pd-name{font-size:22pt;font-weight:700;letter-spacing:-.02em}
+  #print-doc .pd-role{font-size:11pt;color:#444;margin-top:2px}
+  #print-doc .pd-contacts{font-size:9.5pt;color:#444;text-align:right;line-height:1.6}
+  #print-doc .pd-contacts a{color:#444}
+  #print-doc .pd-contacts span{display:block}
+  #print-doc h2{font-size:13pt;font-weight:700;margin:18px 0 8px;
+    border-bottom:1px solid #999;padding-bottom:3px;letter-spacing:.02em}
+  #print-doc .pd-item{margin-bottom:11px;break-inside:avoid}
+  #print-doc .pd-item h3{font-size:11pt;font-weight:600}
+  #print-doc .pd-item .pd-co{color:#444;font-size:10pt}
+  #print-doc .pd-item .pd-meta{font-size:9pt;color:#666;font-style:italic;margin-bottom:3px}
+  #print-doc .pd-item ul{margin:3px 0 0 16px;padding:0}
+  #print-doc .pd-item li{margin-bottom:2px;font-size:10pt}
+  #print-doc .pd-skills{font-size:10pt;margin-bottom:3px}
+  #print-doc .pd-skills b{color:#111}
+  #print-doc .pd-edu{font-size:10pt;margin-bottom:5px}
+  #print-doc .pd-edu b{font-size:10.5pt}
+  #print-doc .pd-edu .pd-when{font-size:9pt;color:#666;font-family:var(--mono)}
+  #print-doc .pd-edu p{color:#444;margin:1px 0}
+  #print-doc .pd-todo{color:#111;font-weight:600}
+  @page{margin:14mm 12mm}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== BOOT BANNER ===== -->
+<div id="boot" aria-hidden="true">
+  <svg class="blogo" viewBox="0 0 170 170" fill="#fff" aria-hidden="true"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.197-2.12-9.973-3.17-14.34-3.17-4.58 0-9.492 1.05-14.746 3.17-5.262 2.13-9.501 3.24-12.742 3.35-4.929.21-9.842-1.96-14.746-6.52-3.13-2.73-7.045-7.41-11.735-14.04-5.032-7.08-9.169-15.29-12.41-24.65-3.471-10.11-5.211-19.9-5.211-29.378 0-10.857 2.346-20.221 7.045-28.067 3.693-6.303 8.606-11.275 14.755-14.925s12.793-5.51 19.948-5.629c3.915 0 9.049 1.211 15.429 3.591 6.362 2.388 10.447 3.599 12.238 3.599 1.339 0 5.877-1.416 13.57-4.239 7.275-2.618 13.415-3.702 18.445-3.275 13.63 1.1 23.87 6.473 30.68 16.153-12.19 7.386-18.22 17.731-18.1 31.002.11 10.337 3.86 18.939 11.23 25.769 3.34 3.17 7.07 5.62 11.22 7.36-.9 2.61-1.85 5.11-2.86 7.51zM119.11 7.24c0 8.102-2.96 15.667-8.86 22.669-7.12 8.324-15.732 13.134-25.071 12.375a25.222 25.222 0 0 1-.188-3.07c0-7.778 3.386-16.102 9.399-22.908 3.002-3.446 6.82-6.311 11.45-8.597 4.62-2.252 8.99-3.497 13.1-3.71.12 1.083.17 2.166.17 3.24z" fill="currentColor"/></svg>
+  <div class="bbar" aria-hidden="true"><i></i></div>
+</div>
+
+<!-- ===== LOCK SCREEN (login) ===== -->
+<div id="lockscreen" aria-hidden="true">
+  <div class="lock-clock" aria-hidden="true">
+    <div class="lc-time" id="lock-time">--:--</div>
+    <div class="lc-date" id="lock-date"></div>
+  </div>
+  <div class="lock-avatar" id="lock-avatar">МП</div>
+  <div class="lock-name" id="lock-name">Матвей Пасынков</div>
+  <form class="lock-pw" id="lock-form" autocomplete="off">
+    <input type="password" id="lock-input" placeholder="Введите пароль" aria-label="Пароль" />
+    <button type="submit" aria-label="Войти">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </form>
+  <div class="lock-hint" id="lock-hint">Введите любой пароль — это демо</div>
+</div>
+
+<!-- ===== POWER CONFIRM OVERLAY ===== -->
+<div id="power-overlay" role="dialog" aria-modal="true" aria-labelledby="power-title">
+  <div class="power-box">
+    <h3 id="power-title">Выключить Mac?</h3>
+    <p id="power-desc">Все окна будут закрыты.</p>
+    <div class="power-btns">
+      <button class="power-btn" id="power-cancel">Отмена</button>
+      <button class="power-btn danger" id="power-confirm">Выключить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DESKTOP ===== -->
+<div id="desktop" aria-hidden="true">
+  <div class="aurora a1"></div>
+  <div class="aurora a2"></div>
+  <div class="aurora a3"></div>
+</div>
+
+<!-- ===== MENU BAR ===== -->
+<div id="menubar" role="banner">
+  <div class="mb-left">
+    <div class="mb-menu-group">
+      <button type="button" class="mb-menu-btn mb-logo-btn" data-menu="apple" aria-label="Apple menu">
+        <svg class="mb-logo" viewBox="0 0 170 170" fill="#fff" aria-hidden="true"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.197-2.12-9.973-3.17-14.34-3.17-4.58 0-9.492 1.05-14.746 3.17-5.262 2.13-9.501 3.24-12.742 3.35-4.929.21-9.842-1.96-14.746-6.52-3.13-2.73-7.045-7.41-11.735-14.04-5.032-7.08-9.169-15.29-12.41-24.65-3.471-10.11-5.211-19.9-5.211-29.378 0-10.857 2.346-20.221 7.045-28.067 3.693-6.303 8.606-11.275 14.755-14.925s12.793-5.51 19.948-5.629c3.915 0 9.049 1.211 15.429 3.591 6.362 2.388 10.447 3.599 12.238 3.599 1.339 0 5.877-1.416 13.57-4.239 7.275-2.618 13.415-3.702 18.445-3.275 13.63 1.1 23.87 6.473 30.68 16.153-12.19 7.386-18.22 17.731-18.1 31.002.11 10.337 3.86 18.939 11.23 25.769 3.34 3.17 7.07 5.62 11.22 7.36-.9 2.61-1.85 5.11-2.86 7.51zM119.11 7.24c0 8.102-2.96 15.667-8.86 22.669-7.12 8.324-15.732 13.134-25.071 12.375a25.222 25.222 0 0 1-.188-3.07c0-7.778 3.386-16.102 9.399-22.908 3.002-3.446 6.82-6.311 11.45-8.597 4.62-2.252 8.99-3.497 13.1-3.71.12 1.083.17 2.166.17 3.24z"/></svg>
+      </button>
+      <div class="mb-dropdown" role="menu">
+        <div class="mb-dd-item" data-action="about-this"><span data-en="About This Mac" data-ru="Об этом Mac">Об этом Mac</span></div>
+        <div class="mb-dd-sep"></div>
+        <div class="mb-dd-item" data-action="lock"><span data-en="Lock Screen" data-ru="Заблокировать экран">Заблокировать экран</span><span class="kbd">⌃⌘Q</span></div>
+        <div class="mb-dd-item" data-action="logout"><span data-en="Log Out…" data-ru="Выйти из системы…">Выйти из системы…</span></div>
+        <div class="mb-dd-sep"></div>
+        <div class="mb-dd-item" data-action="sleep"><span data-en="Sleep…" data-ru="Сон…">Сон…</span></div>
+        <div class="mb-dd-item" data-action="restart"><span data-en="Restart…" data-ru="Перезагрузить…">Перезагрузить…</span></div>
+        <div class="mb-dd-item" data-action="shutdown"><span data-en="Shut Down…" data-ru="Выключить…">Выключить…</span></div>
+      </div>
+    </div>
+    <span class="mb-app" data-en="About" data-ru="Обо мне" id="mb-active-app">Обо мне</span>
+    <nav class="mb-menu" aria-label="Меню">
+      <div class="mb-menu-group">
+        <button type="button" class="mb-menu-btn" data-menu="file" data-en="File" data-ru="Файл">Файл</button>
+        <div class="mb-dropdown" role="menu">
+          <div class="mb-dd-item" data-action="pdf"><span data-en="Print / Save as PDF…" data-ru="Печать / Сохранить PDF…">Печать / Сохранить PDF…</span><span class="kbd">⌘P</span></div>
+          <div class="mb-dd-item" data-action="open-about"><span data-en="Open About" data-ru="Открыть «Обо мне»">Открыть «Обо мне»</span></div>
+          <div class="mb-dd-item" data-action="open-contacts"><span data-en="Open Contacts" data-ru="Открыть «Контакты»">Открыть «Контакты»</span></div>
+          <div class="mb-dd-item" data-action="open-terminal"><span data-en="Open Terminal" data-ru="Открыть «Терминал»">Открыть «Терминал»</span></div>
+          <div class="mb-dd-sep"></div>
+          <div class="mb-dd-item" data-action="github"><span data-en="Open GitHub page" data-ru="Открыть страницу GitHub">Открыть страницу GitHub</span></div>
+        </div>
+      </div>
+      <div class="mb-menu-group">
+        <button type="button" class="mb-menu-btn" data-menu="view" data-en="View" data-ru="Вид">Вид</button>
+        <div class="mb-dropdown" role="menu">
+          <div class="mb-dd-item" data-action="tab-profile"><span data-en="Show Profile" data-ru="Показать: Профиль">Показать: Профиль</span></div>
+          <div class="mb-dd-item" data-action="tab-experience"><span data-en="Show Experience" data-ru="Показать: Опыт">Показать: Опыт</span></div>
+          <div class="mb-dd-item" data-action="tab-skills"><span data-en="Show Skills" data-ru="Показать: Навыки">Показать: Навыки</span></div>
+          <div class="mb-dd-item" data-action="tab-education"><span data-en="Show Education" data-ru="Показать: Образование">Показать: Образование</span></div>
+        </div>
+      </div>
+      <div class="mb-menu-group">
+        <button type="button" class="mb-menu-btn" data-menu="window" data-en="Window" data-ru="Окно">Окно</button>
+        <div class="mb-dropdown" id="dd-window" role="menu">
+          <div class="mb-dd-item" data-action="win-about"><span>Обо мне</span></div>
+          <div class="mb-dd-item" data-action="win-terminal"><span>Терминал</span></div>
+          <div class="mb-dd-item" data-action="win-contacts"><span>Контакты</span></div>
+          <div class="mb-dd-sep"></div>
+          <div class="mb-dd-item" data-action="lang-ru"><span>Русский (RU)</span><span class="chk">✓</span></div>
+          <div class="mb-dd-item" data-action="lang-en"><span>English (EN)</span><span class="chk">✓</span></div>
+        </div>
+      </div>
+      <div class="mb-menu-group">
+        <button type="button" class="mb-menu-btn" data-menu="help" data-en="Help" data-ru="Справка">Справка</button>
+        <div class="mb-dropdown" role="menu">
+          <div class="mb-dd-item" data-action="help-terminal"><span data-en="Open Terminal & type 'help'" data-ru="Открыть Терминал и ввести «help»">Открыть Терминал и ввести «help»</span></div>
+          <div class="mb-dd-item" data-action="help-about"><span data-en="About this Mac… (this resume)" data-ru="Об этом Mac… (об этом резюме)">Об этом Mac… (об этом резюме)</span></div>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="mb-right">
+    <div class="mb-lang" role="group" aria-label="Язык / Language">
+      <button type="button" data-lang="ru" class="active">RU</button>
+      <button type="button" data-lang="en">EN</button>
+    </div>
+    <span aria-hidden="true"><svg viewBox="0 0 18 14" fill="currentColor"><path d="M15.5 7a5.5 5.5 0 0 1-10.95.7L2.5 7H.5l1.8 1.8A7.5 7.5 0 0 0 16.5 7h-1zm-12 0a5.5 5.5 0 0 1 10.95-.7L15.5 7h2l-1.8-1.8A7.5 7.5 0 0 0 1.5 7h2z"/><circle cx="9" cy="7" r="2"/></svg></span>
+    <span aria-hidden="true"><svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="1" y="1" width="20" height="10" rx="2"/><rect x="3" y="3" width="14" height="6" rx="1" fill="currentColor"/><rect x="22" y="4" width="1.5" height="4" rx=".5" fill="currentColor"/></svg></span>
+    <span aria-hidden="true"><svg viewBox="0 0 18 18" fill="currentColor"><path d="M9 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 1.5c.55 0 1 .67 1 1.5v5c0 .83-.45 1.5-1 1.5s-1-.67-1-1.5V6c0-.83.45-1.5 1-1.5z"/></svg></span>
+    <span class="mb-clock" id="clock">--:--</span>
+  </div>
+</div>
+
+<!-- ===== WINDOWS LAYER ===== -->
+<div id="windows"></div>
+
+<!-- ===== DOCK ===== -->
+<div id="dock-wrap">
+  <nav id="dock" role="toolbar" aria-label="Dock">
+    <button class="dock-item" data-app="about" aria-label="Обо мне / About">
+      <span class="tip" data-en="About" data-ru="Обо мне">Обо мне</span>
+      <span class="dot" aria-hidden="true"></span>
+      <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7d6cff"/><stop offset="1" stop-color="#3da5ff"/></linearGradient></defs><rect x="4" y="6" width="40" height="36" rx="8" fill="url(#g1)"/><circle cx="17" cy="20" r="4" fill="#fff"/><path d="M8 38c4-8 10-8 14-4s8 8 18 4v6H8z" fill="#fff" opacity=".9"/></svg>
+    </button>
+    <button class="dock-item" data-app="terminal" aria-label="Терминал / Terminal">
+      <span class="tip" data-en="Terminal" data-ru="Терминал">Терминал</span>
+      <span class="dot" aria-hidden="true"></span>
+      <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="7" width="40" height="34" rx="7" fill="#1c1c2e"/><rect x="4" y="7" width="40" height="7" rx="7" fill="#3a3a52"/><path d="M11 22l6 4-6 4M21 31h9" stroke="#5fff9b" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="dock-item" data-app="contacts" aria-label="Контакты / Contacts">
+      <span class="tip" data-en="Contacts" data-ru="Контакты">Контакты</span>
+      <span class="dot" aria-hidden="true"></span>
+      <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="8" width="40" height="32" rx="8" fill="#fff"/><circle cx="24" cy="22" r="7" fill="#fe8a3d"/><path d="M11 36c2-6 7-9 13-9s11 3 13 9z" fill="#fe8a3d"/></svg>
+    </button>
+    <span class="dock-sep" aria-hidden="true"></span>
+    <a class="dock-item" href="https://github.com/matveipasynkov" target="_blank" rel="noopener" aria-label="GitHub">
+      <span class="tip">GitHub</span>
+      <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="6" width="40" height="36" rx="8" fill="#1c1c2e"/><path d="M24 12a12 12 0 0 0-3.8 23.4c.6.1.8-.26.8-.58v-2c-3.3.72-4-1.58-4-1.58-.55-1.4-1.34-1.77-1.34-1.77-1.1-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.84 2.8 1.3 3.48 1 .1-.78.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.93 0-1.3.47-2.38 1.23-3.22-.12-.3-.53-1.52.12-3.17 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.65.24 2.87.12 3.17.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.2.7.82.58A12 12 0 0 0 24 12z" fill="#fff"/></svg>
+    </a>
+    <button class="dock-item" data-app="pdf" aria-label="Скачать PDF / Download PDF">
+      <span class="tip" data-en="Download PDF" data-ru="Скачать PDF">Скачать PDF</span>
+      <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff6b6b"/><stop offset="1" stop-color="#e63946"/></linearGradient></defs><rect x="8" y="4" width="32" height="40" rx="5" fill="#fff"/><rect x="8" y="4" width="32" height="9" rx="5" fill="url(#g2)"/><path d="M16 20h16M16 26h16M16 32h10" stroke="#ccc" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </nav>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ================================================================ DATA: resume content (RU/EN) */
+const RM = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+const isMobile = () => window.matchMedia('(max-width:760px)').matches;
+
+/* ================================================================ WINDOW MANAGER */
+let zTop = 100;
+const opened = {};   // app -> {el, maximized, prevRect}
+
+function el(html){ const t=document.createElement('template'); t.innerHTML=html.trim(); return t.content.firstElementChild; }
+
+function bringToFront(win){
+  zTop++; win.style.zIndex = zTop;
+  document.querySelectorAll('.win').forEach(w=>w.classList.remove('active'));
+  win.classList.add('active');
+  const app = win.dataset.app;
+  const aa = document.getElementById('mb-active-app');
+  if(aa){ const item = APPS.find(a=>a.id===app); if(item) aa.textContent = L(item.title); }
+}
+
+function makeWin(app, title, bodyHTML, opts={}){
+  opts = Object.assign({width:560,height:460},opts);
+  const win = el(`
+    <div class="win opening" role="dialog" aria-label="${title}" data-app="${app}" tabindex="-1">
+      <div class="titlebar">
+        <div class="tlights">
+          <span class="tlight close" role="button" aria-label="close"><svg viewBox="0 0 8 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M1.5 1.5l5 5M6.5 1.5l-5 5"/></svg></span>
+          <span class="tlight min" role="button" aria-label="minimize"><svg viewBox="0 0 8 8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><path d="M1.5 4h5"/></svg></span>
+          <span class="tlight max" role="button" aria-label="maximize"><svg viewBox="0 0 8 8" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" fill="none"><path d="M2 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v3a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5z" stroke="none"/></svg></span>
+        </div>
+        <div class="ttitle">${title}</div>
+      </div>
+      <div class="win-body">${bodyHTML}</div>
+    </div>`);
+  const layer = document.getElementById('windows');
+  layer.appendChild(win);
+
+  // position: center-ish, cascading
+  const cw = isMobile() ? window.innerWidth-16 : opts.width;
+  const ch = isMobile() ? window.innerHeight-44-28-70 : opts.height;
+  const cx = isMobile() ? 8 : Math.max(16,(window.innerWidth-cw)/2 + (Object.keys(opened).length%4)*26 - 39);
+  const cy = isMobile() ? 36 : Math.max(40,(window.innerHeight-ch)/2 - 30 + (Object.keys(opened).length%4)*26);
+  win.style.width = cw+'px'; win.style.height = ch+'px';
+  win.style.left = cx+'px'; win.style.top = cy+'px';
+
+  opened[app] = {el:win, maximized:false, prevRect:null};
+  if(!RM) win.addEventListener('animationend',()=>win.classList.remove('opening'),{once:true});
+  else win.classList.remove('opening');
+
+  // wire controls
+  win.querySelector('.titlebar').addEventListener('mousedown',startDrag);
+  win.querySelector('.titlebar').addEventListener('touchstart',startDrag,{passive:false});
+  win.addEventListener('mousedown',()=>bringToFront(win));
+  win.querySelector('.tlight.close').addEventListener('click',e=>{e.stopPropagation();closeWin(app);});
+  win.querySelector('.tlight.min').addEventListener('click',e=>{e.stopPropagation();minWin(app);});
+  win.querySelector('.tlight.max').addEventListener('click',e=>{e.stopPropagation();toggleMax(app);});
+  win.addEventListener('keydown',e=>{ if(e.key==='Escape'){ /* keep open, just blur focus back */ } });
+
+  bringToFront(win);
+  updateDockDots();
+  bounceDock(app);
+  return win;
+
+  function startDrag(e){
+    if(e.target.closest('.tlight')) return;
+    if(opened[app] && opened[app].maximized) return;
+    e.preventDefault();
+    const pe = e.touches?e.touches[0]:e;
+    const r = win.getBoundingClientRect();
+    let dx = pe.clientX-r.left, dy = pe.clientY-r.top;
+    win.classList.add('dragging');
+    function move(ev){
+      const p = ev.touches?ev.touches[0]:ev;
+      let nx = p.clientX-dx, ny = p.clientY-dy;
+      ny = Math.max(28, ny); // below menu bar
+      nx = Math.max(-r.width+80, Math.min(window.innerWidth-80, nx));
+      win.style.left = nx+'px'; win.style.top = ny+'px';
+    }
+    function up(){ win.classList.remove('dragging');
+      document.removeEventListener('mousemove',move); document.removeEventListener('mouseup',up);
+      document.removeEventListener('touchmove',move); document.removeEventListener('touchend',up);
+    }
+    document.addEventListener('mousemove',move); document.addEventListener('mouseup',up);
+    document.addEventListener('touchmove',move,{passive:false}); document.addEventListener('touchend',up);
+  }
+}
+
+function closeWin(app){
+  const o = opened[app]; if(!o) return;
+  if(RM){ o.el.remove(); delete opened[app]; updateDockDots(); return; }
+  o.el.classList.add('closing');
+  o.el.addEventListener('animationend',()=>{ o.el.remove(); },{once:true});
+  delete opened[app]; updateDockDots();
+}
+function minWin(app){
+  const o = opened[app]; if(!o) return;
+  if(RM){ o.el.style.display='none'; o.minimized=true; updateDockDots(); return; }
+  o.el.classList.add('minimizing');
+  o.el.addEventListener('animationend',()=>{ o.el.style.display='none'; o.el.classList.remove('minimizing'); o.minimized=true; },{once:true});
+  updateDockDots();
+}
+function restoreWin(app){
+  const o = opened[app]; if(!o) return;
+  o.el.style.display=''; o.minimized=false;
+  bringToFront(o.el); updateDockDots();
+}
+function toggleMax(app){
+  const o = opened[app]; if(!o) return;
+  const w = o.el;
+  if(!o.maximized){
+    o.prevRect = {left:w.style.left,top:w.style.top,width:w.style.width,height:w.style.height};
+    w.style.left='4px'; w.style.top='32px';
+    w.style.width=(window.innerWidth-8)+'px'; w.style.height=(window.innerHeight-36-70)+'px';
+    o.maximized=true;
+  } else {
+    Object.assign(w.style, o.prevRect); o.maximized=false;
+  }
+}
+function updateDockDots(){
+  document.querySelectorAll('.dock-item').forEach(d=>{
+    const a=d.dataset.app; d.classList.toggle('running', !!(a && opened[a]));
+  });
+}
+function bounceDock(app){
+  const d = document.querySelector('.dock-item[data-app="'+app+'"]');
+  if(!d||RM) return;
+  d.classList.add('bouncing');
+  d.addEventListener('animationend',()=>d.classList.remove('bouncing'),{once:true});
+}
+
+/* ================================================================ LANGUAGE */
+let LANG = localStorage.getItem('lang')||'ru';
+function L(obj){ return (typeof obj==='string')?obj:(obj[LANG]||obj.ru||obj.en); }
+function applyLang(l){
+  LANG=l; localStorage.setItem('lang',l);
+  document.documentElement.lang=l;
+  document.querySelectorAll('.lang button, .mb-lang button').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang===l);
+  });
+  document.querySelectorAll('[data-ru],[data-en]').forEach(node=>{
+    const v = node.getAttribute('data-'+l);
+    if(v!=null) node.textContent=v;
+  });
+  document.querySelectorAll('[data-'+l+'-ph]').forEach(node=>{
+    node.placeholder = node.getAttribute('data-'+l+'-ph');
+  });
+  // re-render dynamic windows
+  if(opened.about) renderAboutTabs();
+  if(opened.contacts) renderContactsDetail();
+  // keep menu checkmarks + print doc in sync with language
+  if(window.refreshMenuLang) refreshMenuLang();
+  buildPrintDoc();
+  refreshLockLabels();
+  // active app name in menu bar
+  const aa=document.getElementById('mb-active-app');
+  const activeWin=document.querySelector('.win.active');
+  if(activeWin){ const a=APPS.find(x=>x.id===activeWin.dataset.app); if(a&&aa) aa.textContent=L(a.title); }
+  else if(aa){ aa.textContent = L({ru:'Обо мне',en:'About'}); }
+}
+
+/* ================================================================ APPS registry */
+const APPS = [
+  {id:'about', title:{ru:'Обо мне',en:'About'}},
+  {id:'terminal', title:{ru:'Терминал',en:'Terminal'}},
+  {id:'contacts', title:{ru:'Контакты',en:'Contacts'}},
+];
+
+function openApp(app){
+  if(app==='pdf'){ buildPrintDoc(); window.print(); return; }
+  if(opened[app]){ if(opened[app].minimized) restoreWin(app); else { bringToFront(opened[app].el); } return; }
+  if(app==='about') openAbout();
+  else if(app==='terminal') openTerminal();
+  else if(app==='contacts') openContacts();
+}
+
+/* ================================================================ CLOCK */
+(function(){
+  const c=document.getElementById('clock');
+  const days=['Вс','Пн','Вт','Ср','Чт','Пт','Сб'];
+  const daysEn=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months=['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+  const monthsEn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function tick(){
+    const d=new Date();
+    const hh=String(d.getHours()).padStart(2,'0'), mm=String(d.getMinutes()).padStart(2,'0');
+    const dd = LANG==='en'?daysEn:days;
+    const mo = LANG==='en'?monthsEn:months;
+    c.textContent = `${dd[d.getDay()]} ${d.getDate()} ${mo[d.getMonth()]}  ${hh}:${mm}`;
+  }
+  tick(); setInterval(tick,1000*15);
+})();
+
+/* ================================================================ TOAST */
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(t._tm); t._tm=setTimeout(()=>t.classList.remove('show'),1800);
+}
+
+/* ================================================================ ABOUT APP + CONTENT DATA */
+let activeTab='profile';
+const DATA = {
+  profile:{
+    name:{ru:'Матвей Пасынков',en:'Matvey Pasynkov'},
+    initials:{ru:'МП',en:'MP'},
+    role:{ru:'Project Manager',en:'Project Manager'},
+    at:'hh.ru',
+    lead:{ru:'Бизнес-аналитик, ставший проджект-менеджером. Веду инициативы роста end-to-end вместе с командами продаж, аналитики и IT — от ресёрча и гипотезы до результата в проде.',
+          en:'Business analyst turned project manager. I lead growth initiatives end-to-end with sales, analytics and IT teams — from research and hypothesis to a shipped outcome.'},
+    stats:[
+      {num:'20', lbl:{ru:'лет',en:'years old'}},
+      {num:{ru:'топ-4%',en:'top-4%'}, lbl:{ru:'потока ВШЭ',en:'of HSE cohort'}},
+      {num:'1yr 8mo', lbl:{ru:'опыта',en:'experience'}},
+      {num:'C1', lbl:{ru:'английский',en:'English'}},
+    ],
+  },
+  experience:[
+    {logo:'hh', cls:'hh', title:{ru:'Project Manager',en:'Project Manager'}, co:'hh.ru',
+     tag:{ru:'с июня 2026',en:'since Jun 2026'}, period:{ru:'Москва · настоящее время',en:'Moscow · present'},
+     feature:true,
+     bullets:[
+       {ru:'Веду инициативы роста end-to-end вместе с командами продаж, аналитики и IT — от ресёрча и гипотезы до результата в проде.',
+        en:'Lead growth initiatives end-to-end with sales, analytics and IT — from discovery and hypothesis to a shipped outcome.'},
+     ]},
+    {logo:'Ok', cls:'alt', title:{ru:'Бизнес-аналитик',en:'Business Analyst'}, co:'Okkam (ex. dentsu Russia)',
+     tag:{ru:'апр 2025 — наст.',en:'Apr 2025 — now'}, period:{ru:'СМИ · маркетинг · реклама · BTL · PR',en:'Media · marketing · advertising · BTL · PR'},
+     bullets:[
+       {ru:'Собираю маркетинговые и growth-стратегии для портфеля клиентских компаний в медиа, рекламе, BTL и PR.',
+        en:'Build marketing & growth strategies for a portfolio of client companies across media, advertising, BTL and PR.'},
+       {ru:'Автоматизирую бизнес-процессы на генеративном ИИ — снимаю <span class="todo">[~N часов/неделю]</span> ручной работы с команды из <span class="todo">[~N человек]</span>.',
+        en:'Automate business processes with generative AI — cutting manual work by <span class="todo">[~N hrs/week]</span> for a team of <span class="todo">[~N]</span>.'},
+       {ru:'Проводю исследования рынка под ключ: гипотеза, сбор данных, анализ, выводы, готовые к принятию решения.',
+        en:'Run end-to-end market research: hypothesis, data collection, analysis, and decision-ready conclusions.'},
+       {ru:'Отвечаю за слой данных руками — Excel/VBA, Python (Pandas), SQL и BI-дашборды, на которых команда принимает решения.',
+        en:'Own the data layer hands-on — Excel/VBA, Python (Pandas), SQL and BI dashboards the team runs decisions on.'},
+     ]},
+    {logo:{ru:'ВШ',en:'HSE'}, cls:'alt', title:{ru:'Учебный ассистент · Аналитик данных',en:'Teaching Assistant · Data Analyst'}, co:{ru:'НИУ ВШЭ',en:'HSE University'},
+     tag:{ru:'сен 2024 — наст.',en:'Sep 2024 — now'}, period:{ru:'ФКН · Программная инженерия',en:'FCS · Software Engineering'},
+     bullets:[
+       {ru:'Учебный ассистент потока: веду консультации и проверяю элементы контроля по мат. анализу, теории вероятностей, мат. статистике и линейной алгебре — в топ-4% потока.',
+        en:'Teaching assistant to a cohort: run consultations and check assessments across calculus, probability, statistics and linear algebra — ranked top-4%.'},
+       {ru:'Аналитик данных в учебных проектах — например, анализ недвижимости под ключ на Python (numpy, pandas, sklearn, scipy), SQL (DDL/DML, оконные функции, индексы) и Excel/VBA.',
+        en:'Data analyst on academic projects — e.g. real-estate analysis end-to-end with Python (numpy, pandas, sklearn, scipy), SQL (DDL/DML, window functions, indexes) and Excel/VBA.'},
+     ]},
+  ],
+  skills:[
+    {g:{ru:'Аналитика и данные',en:'Analytics & Data'}, items:[
+      {ru:'Бизнес-анализ',en:'Business analysis'}, 'SQL', 'Python',
+      {ru:'A/B тесты',en:'A/B testing'}, {ru:'Мат. статистика',en:'Math statistics'}, 'Power BI', 'Excel / VBA']},
+    {g:{ru:'Продукт и управление',en:'Product & PM'}, items:[
+      {ru:'Постановка задач разработчикам',en:'Briefing devs'}, 'Agile Project Management',
+      {ru:'Стратегическое планирование',en:'Strategic planning'}, {ru:'Управление ожиданиями',en:'Managing expectations'},
+      {ru:'Бизнес-требования',en:'Business requirements'}]},
+    {g:{ru:'Инструменты',en:'Tools'}, items:['Atlassian Confluence','Draw.io','PowerPoint','Microsoft Office']},
+    {g:{ru:'Языки',en:'Languages'}, items:[{ru:'Русский — родной',en:'Russian — Native'},{ru:'Английский — C1',en:'English — C1'}]},
+  ],
+  education:{
+    timeline:[
+      {when:{ru:'2023 — настоящее время',en:'2023 — present'}, h:{ru:'НИУ ВШЭ — Программная инженерия (ФКН)',en:'HSE University — Software Engineering (FCS)'},
+       p:{ru:'Топ-1 факультет по компьютерным наукам в России. Топ-4% студентов потока.',en:'Top-1 CS faculty in Russia. Top-4% of the cohort.'}},
+      {when:'2019 — 2023', h:{ru:'Математическая школа №179',en:'Math School №179'},
+       p:{ru:'Топ-3 математических школ страны. Мат. анализ, линейная алгебра, дискретная математика, мат. статистика, теория вероятностей.',
+          en:'Top-3 math school in Russia. Calculus, linear algebra, discrete math, statistics, probability.'}},
+    ],
+    olympiads:[
+      {m:'🏅', t:{ru:'Московская мат. олимпиада 2022 — призёр',en:'Moscow Math Olympiad 2022 — prize-winner'}},
+      {m:'🏅', t:{ru:'Олимпиада «Физтех» 2022 и 2023 — призёр',en:'Phystech Olympiad 2022 & 2023 — prize-winner'}},
+      {m:'🏆', t:{ru:'Хакатон «Код риска» (Сбер) 2026 — финалист',en:'Sber «Code of Risk» hackathon 2026 — finalist'}},
+    ],
+    courses:['Y Combinator Startup School · PM','VK · Product Management',
+      {ru:'ВШЭ · Интеллектуальный анализ данных',en:'HSE · Data Mining'},
+      {ru:'ВШЭ · Анализ данных на Python',en:'HSE · Data Analysis in Python'},'Kaggle · ML & Data Analytics'],
+  },
+  contacts:[
+    {key:'telegram', name:'Telegram', val:'@matveipasynkov', copy:'https://t.me/matveipasynkov', color:'#2aabee',
+     ic:'<path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>'},
+    {key:'email', name:'Email', val:'mepasynkov@edu.hse.ru', copy:'mepasynkov@edu.hse.ru', color:'#ff5f57',
+     ic:'<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>'},
+    {key:'phone', name:{ru:'Телефон',en:'Phone'}, val:'+7 (968) 997-90-19', copy:'+79689979019', color:'#28c840',
+     ic:'<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="2"/>'},
+    {key:'github', name:'GitHub', val:'/matveipasynkov', copy:'https://github.com/matveipasynkov', color:'#1c1c2e',
+     ic:'<path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.21.67.8.56A11.51 11.51 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/>'},
+  ],
+};
+
+const TABS=[
+  {id:'profile', title:{ru:'Профиль',en:'Profile'}, ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>'},
+  {id:'experience', title:{ru:'Опыт',en:'Experience'}, ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>'},
+  {id:'skills', title:{ru:'Навыки',en:'Skills'}, ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.8 6.5 19.5l1-6.3L3 8.9 9 8z"/></svg>'},
+  {id:'education', title:{ru:'Образование',en:'Education'}, ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11v5c0 1 2 3 5 3s5-2 5-3v-5"/></svg>'},
+];
+
+function openAbout(){
+  const body = `
+    <div class="about">
+      <nav class="about-side" aria-label="Разделы"></nav>
+      <div class="about-main"></div>
+    </div>`;
+  const win = makeWin('about', L({ru:'Обо мне — Матвей Пасынков',en:'About — Matvey Pasynkov'}), body,
+    {width:Math.min(680,window.innerWidth-20), height:Math.min(520,window.innerHeight-130)});
+  renderAboutTabs();
+}
+function renderAboutTabs(){
+  const win=opened.about && opened.about.el; if(!win) return;
+  const side=win.querySelector('.about-side'); const main=win.querySelector('.about-main');
+  // retitle
+  win.querySelector('.ttitle').textContent = L({ru:'Обо мне — Матвей Пасынков',en:'About — Matvey Pasynkov'});
+  side.innerHTML = TABS.map(t=>`<button class="aside-item ${t.id===activeTab?'active':''}" data-tab="${t.id}">${t.ic}<span>${L(t.title)}</span></button>`).join('');
+  side.querySelectorAll('.aside-item').forEach(b=>b.addEventListener('click',()=>{activeTab=b.dataset.tab;renderAboutTabs();}));
+  main.innerHTML = renderTab(activeTab);
+}
+function renderTab(id){
+  if(id==='profile') return profileTab();
+  if(id==='experience') return experienceTab();
+  if(id==='skills') return skillsTab();
+  if(id==='education') return educationTab();
+  return '';
+}
+function profileTab(){
+  const p=DATA.profile;
+  return `
+    <div class="profile-head">
+      <div class="avatar">${L(p.initials)}</div>
+      <div>
+        <h1>${L(p.name)}</h1>
+        <div class="profile-role">${L(p.role)} <b>@${p.at}</b></div>
+      </div>
+    </div>
+    <p class="lead">${L(p.lead)}</p>
+    <div class="stats">
+      ${p.stats.map(s=>`<div class="stat"><div class="num">${L(s.num)}</div><div class="lbl">${L(s.lbl)}</div></div>`).join('')}
+    </div>`;
+}
+function experienceTab(){
+  return DATA.experience.map(e=>`
+    <div class="exp-card ${e.feature?'feature':''}">
+      <div class="exp-head">
+        <div class="exp-logo ${e.cls||''}">${L(e.logo)}</div>
+        <div class="exp-meta"><h3>${L(e.title)}</h3><div class="exp-co">${typeof e.co==='string'?e.co:L(e.co)}</div></div>
+        <span class="exp-tag">${L(e.tag)}</span>
+      </div>
+      <div class="exp-period">${L(e.period)}</div>
+      <ul class="bullets">${e.bullets.map(b=>`<li>${L(b)}</li>`).join('')}</ul>
+    </div>`).join('');
+}
+function skillsTab(){
+  return DATA.skills.map(gr=>`
+    <div class="skill-group">
+      <div class="gname">${L(gr.g)}</div>
+      <div class="chips">${gr.items.map(c=>`<span class="chip">${L(c)}</span>`).join('')}</div>
+    </div>`).join('');
+}
+function educationTab(){
+  const ed=DATA.education;
+  return `
+    <div class="timeline">
+      ${ed.timeline.map(t=>`<div class="tl-item"><div class="tl-when">${L(t.when)}</div><h4>${L(t.h)}</h4><p>${L(t.p)}</p></div>`).join('')}
+      <div class="tl-item"><div class="tl-when">${L({ru:'Олимпиады',en:'Olympiads'})}</div>
+        <div class="awards">${ed.olympiads.map(a=>`<span class="award"><span class="m">${a.m}</span>${L(a.t)}</span>`).join('')}</div>
+      </div>
+      <div class="tl-item"><div class="tl-when">${L({ru:'Курсы',en:'Courses'})}</div>
+        <div class="awards">${ed.courses.map(a=>`<span class="award">${L(a)}</span>`).join('')}</div>
+      </div>
+    </div>`;
+}
+
+/* ================================================================ PRINT DOCUMENT */
+/* Builds a clean, one-flow resume document into #print-doc from DATA.
+   Hidden on screen; @media print shows ONLY #print-doc and hides the
+   entire desktop UI — so window.print() yields a tidy recruiter PDF,
+   not a dump of the desktop. Rebuilt on language change. */
+function buildPrintDoc(){
+  let doc=document.getElementById('print-doc');
+  if(!doc){ doc=el('<div id="print-doc" aria-hidden="true"></div>'); document.body.appendChild(doc); }
+  const p=DATA.profile;
+  const c=DATA.contacts;
+  const escape=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // strip HTML from bullet strings (they contain <span class="todo">)
+  const strip=s=>String(s).replace(/<[^>]+>/g,'');
+  doc.innerHTML = `
+    <div class="pd-head">
+      <div>
+        <div class="pd-name">${L(p.name)}</div>
+        <div class="pd-role">${L(p.role)} @ ${p.at}</div>
+      </div>
+      <div class="pd-contacts">
+        ${c.map(x=>`<span>${escape(L(x.name))}: ${escape(x.val)}</span>`).join('')}
+      </div>
+    </div>
+    <h2>${L({ru:'Опыт работы',en:'Experience'})}</h2>
+    ${DATA.experience.map(e=>`
+      <div class="pd-item">
+        <h3>${L(e.title)} — <span class="pd-co">${typeof e.co==='string'?e.co:L(e.co)}</span></h3>
+        <div class="pd-meta">${L(e.period)} · ${L(e.tag)}</div>
+        <ul>${e.bullets.map(b=>`<li>${escape(strip(L(b)))}</li>`).join('')}</ul>
+      </div>`).join('')}
+    <h2>${L({ru:'Навыки',en:'Skills'})}</h2>
+    ${DATA.skills.map(g=>`<div class="pd-skills"><b>${L(g.g)}:</b> ${g.items.map(i=>escape(L(i))).join(', ')}</div>`).join('')}
+    <h2>${L({ru:'Образование',en:'Education'})}</h2>
+    ${DATA.education.timeline.map(t=>`
+      <div class="pd-edu">
+        <b>${L(t.h)}</b>
+        <div class="pd-when">${L(t.when)}</div>
+        <p>${escape(L(t.p))}</p>
+      </div>`).join('')}
+    <div class="pd-edu"><b>${L({ru:'Олимпиады',en:'Olympiads'})}</b> — ${DATA.education.olympiads.map(a=>escape(L(a.t))).join('; ')}.</div>
+    <div class="pd-edu"><b>${L({ru:'Курсы',en:'Courses'})}</b> — ${DATA.education.courses.map(c=>escape(L(c))).join('; ')}.</div>
+  `;
+}
+
+/* ================================================================ TERMINAL */
+function openTerminal(){
+  const body = `<div class="terminal" id="term"></div>`;
+  makeWin('terminal', L({ru:'Терминал',en:'Terminal'})+' — matvey@hh.ru', body,
+    {width:Math.min(620,window.innerWidth-20), height:Math.min(400,window.innerHeight-130)});
+  const term=document.getElementById('term');
+  const state={hist:[], hi:-1};
+  function prompt(){ return `<span class="prompt"><span class="user">matvey</span><span class="at">@</span><span class="host">hh.ru</span> <span class="path">~</span> %</span> `; }
+  function print(html){ const l=el(`<div class="ln">${html}</div>`); term.appendChild(l); term.scrollTop=term.scrollHeight; }
+  function inputLine(){
+    const line=el(`<div class="term-input-line">${prompt()}<input class="term-input" autocomplete="off" spellcheck="false" aria-label="terminal input"></div>`);
+    term.appendChild(line); const inp=line.querySelector('input'); inp.focus(); term.scrollTop=term.scrollHeight;
+    inp.addEventListener('keydown',e=>{
+      if(e.key==='Enter'){
+        const cmd=inp.value; inp.disabled=true;
+        line.outerHTML=`<div class="ln">${prompt()}${escapeHtml(cmd)}</div>`;
+        state.hist.unshift(cmd); state.hi=-1; run(cmd);
+      } else if(e.key==='ArrowUp'){ e.preventDefault();
+        if(state.hi<state.hist.length-1){ state.hi++; inp.value=state.hist[state.hi]||''; }
+      } else if(e.key==='ArrowDown'){ e.preventDefault();
+        if(state.hi>0){ state.hi--; inp.value=state.hist[state.hi]||''; } else { state.hi=-1; inp.value=''; }
+      }
+    });
+    // keep focus when clicking in the terminal
+    term.addEventListener('click',()=>{ const i=term.querySelector('.term-input:not([disabled])'); if(i)i.focus(); });
+  }
+  function escapeHtml(s){ return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+  function run(raw){
+    const cmd=raw.trim(); const [name,...args]=cmd.split(/\s+/);
+    const c=(ru,en)=>LANG==='en'?en:ru;
+    switch(name){
+      case '': break;
+      case 'help':
+        print(`<span class="dim">${c('Доступные команды:','Available commands:')}</span>
+  <span class="ok">help</span>     ${c('— этот список','— this list')}
+  <span class="ok">ls</span>       ${c('— файлы резюме','— resume files')}
+  <span class="ok">cat</span> &lt;f&gt; ${c('— вывести файл','— print a file')}
+  <span class="ok">open</span> &lt;app&gt; ${c('— открыть окно (about/contacts)','— open a window')}
+  <span class="ok">whoami</span>   ${c('— кто я','— who am I')}
+  <span class="ok">neofetch</span> ${c('— системная инфа','— system info')}
+  <span class="ok">clear</span>    ${c('— очистить экран','— clear screen')}`); break;
+      case 'ls':
+        print(`about.txt   experience.txt   skills.txt   education.txt   contacts.txt`); break;
+      case 'cat': {
+        const f=args[0];
+        const files={about:DATA.profile.lead, experience:DATA.experience.map(e=>L(e.title)+' @ '+(typeof e.co==='string'?e.co:L(e.co))).join('\n'),
+          skills:DATA.skills.map(g=>L(g.g)+': '+g.items.map(L).join(', ')).join('\n'),
+          education:DATA.education.timeline.map(t=>L(t.h)).join('\n'),
+          contacts:DATA.contacts.map(x=>x.name+': '+x.val).join('\n')};
+        const key=(f||'').replace('.txt','');
+        if(files[key]) print(escapeHtml(L(files[key])).replace(/\n/g,'<br>'));
+        else print(`<span class="err">cat: ${(f||'')}: ${c('нет такого файла','No such file')}</span>`); break;
+      }
+      case 'open': {
+        const a=args[0];
+        if(['about','contacts'].includes(a)){ openApp(a==='about'?'about':'contacts'); print(`<span class="ok">${c('открываю','opening')} ${a}…</span>`); }
+        else if(a==='experience'||a==='skills'||a==='education'){ openApp('about'); activeTab=a; renderAboutTabs(); print(`<span class="ok">${c('открываю','opening')} ${a}…</span>`); }
+        else print(`<span class="err">open: ${c('неизвестное приложение','unknown app')}: ${a||''}</span>`);
+        break;
+      }
+      case 'whoami': print('matvey'); break;
+      case 'neofetch': print(`<span class="ok">       .:'</span>        <span class="user">matvey</span>@<span class="host">hh.ru</span>
+    <span class="ok">  :' '</span>         ---------
+   <span class="ok">.'   '</span>        <span class="dim">OS</span>: macOS Sonoma (резюме)
+  <span class="ok">:    .'</span>        <span class="dim">Role</span>: Project Manager
+  <span class="ok">  .'</span>           <span class="dim">Team</span>: hh.ru — sales/analytics/IT
+   <span class="ok">  :</span>           <span class="dim">Stack</span>: SQL, Python, Power BI, Excel/VBA
+                 <span class="dim">Edu</span>: НИУ ВШЭ (top-4%)
+                 <span class="dim">Lang</span>: RU / EN (C1)`); break;
+      case 'clear': term.innerHTML=''; break;
+      case 'sudo': print(`<span class="dim">${c('matvey is not in the sudoers file. This incident will be reported.','matvey не в списке sudoers. Инцидент будет доложен.')}</span>`); break;
+      case 'echo': print(escapeHtml(args.join(' '))); break;
+      case 'pwd': print('/Users/matvey'); break;
+      case 'date': print(new Date().toString()); break;
+      default: print(`<span class="err">zsh: command not found: ${escapeHtml(name)}</span>`);
+    }
+    inputLine();
+  }
+  // banner
+  print(`<span class="dim">${LANG==='en'?'Last login:':'Последний вход:'} ${new Date().toDateString()} on ttys001</span>`);
+  print(`<span class="ok">${LANG==='en'?"Welcome to Matvey's resume. Type 'help' to begin.":"Добро пожаловать в резюме Матвея. Введите 'help'."}</span>`);
+  inputLine();
+}
+
+/* ================================================================ CONTACTS */
+let activeContact='telegram';
+function openContacts(){
+  const body = `<div class="contacts"><nav class="c-list" id="c-list"></nav><div class="c-detail" id="c-detail"></div></div>`;
+  makeWin('contacts', L({ru:'Контакты',en:'Contacts'}), body,
+    {width:Math.min(560,window.innerWidth-20), height:Math.min(420,window.innerHeight-130)});
+  renderContactsList();
+  renderContactsDetail();
+}
+function renderContactsList(){
+  const win=opened.contacts && opened.contacts.el; if(!win) return;
+  const list=win.querySelector('#c-list');
+  list.innerHTML = DATA.contacts.map(c=>`
+    <button class="c-item ${c.key===activeContact?'active':''}" data-c="${c.key}">
+      <span class="ci-ic" style="background:${c.color}"><svg viewBox="0 0 24 24" fill="${c.key==='email'||c.key==='phone'?'none':'currentColor'}" ${c.key==='email'||c.key==='phone'?'stroke-width="0"':''} aria-hidden="true">${c.ic}</svg></span>
+      <span class="ci-n">${L(c.name)}</span>
+    </button>`).join('');
+  list.querySelectorAll('.c-item').forEach(b=>b.addEventListener('click',()=>{activeContact=b.dataset.c;renderContactsList();renderContactsDetail();}));
+}
+function renderContactsDetail(){
+  const win=opened.contacts && opened.contacts.el; if(!win) return;
+  const d=win.querySelector('#c-detail');
+  const c=DATA.contacts.find(x=>x.key===activeContact)||DATA.contacts[0];
+  const copyMsg = LANG==='en'?'Copy':'Копировать';
+  d.innerHTML = `
+    <div class="avatar">${L(DATA.profile.initials)}</div>
+    <h2>${L(DATA.profile.name)}</h2>
+    <div class="role">${L(DATA.profile.role)} @ ${DATA.profile.at}</div>
+    <div class="c-row" data-copy="${c.copy}" role="button" tabindex="0">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg>
+      <span class="v">${c.val}</span>
+      <span class="copy-hint">${copyMsg}</span>
+    </div>`;
+  const row=d.querySelector('.c-row');
+  const doCopy=()=>{ navigator.clipboard.writeText(c.copy).then(()=>toast((LANG==='en'?'Copied: ':'Скопировано: ')+c.val)).catch(()=>toast(LANG==='en'?'Copy failed':'Не удалось скопировать')); };
+  row.addEventListener('click',doCopy);
+  row.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();doCopy();} });
+}
+
+/* ================================================================ DOCK + MENUBAR EVENTS */
+document.querySelectorAll('.dock-item').forEach(d=>{
+  d.addEventListener('click',()=>{ const a=d.dataset.app; if(a) openApp(a); });
+});
+document.querySelectorAll('.mb-lang button').forEach(b=>{
+  b.addEventListener('click',()=>applyLang(b.dataset.lang));
+});
+// double-click on desktop background = open About (fun)
+document.getElementById('desktop').addEventListener('dblclick',()=>openApp('about'));
+
+/* ================================================================ MENUBAR DROPDOWN MENUS */
+/* Click a menu title to toggle its dropdown; hovering another open menu
+   switches to it (macOS feel). Click outside / on an item closes. */
+(function(){
+  const groups=document.querySelectorAll('.mb-menu-group');
+  let openMenu=null;
+  function close(){ if(openMenu){ openMenu.classList.remove('open'); openMenu=null; } }
+  function open(btn){ close(); btn.classList.add('open'); openMenu=btn; }
+  groups.forEach(g=>{
+    const btn=g.querySelector('.mb-menu-btn');
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(openMenu===btn) close(); else open(btn);
+    });
+    // hover-switch once a menu is already open
+    g.addEventListener('mouseenter',()=>{ if(openMenu && openMenu!==btn) open(btn); });
+    // wire item actions
+    g.querySelectorAll('.mb-dd-item').forEach(it=>{
+      it.addEventListener('click',e=>{
+        e.stopPropagation();
+        const action=it.dataset.action;
+        if(action) runMenuAction(action);
+        close();
+      });
+    });
+  });
+  // close on outside click
+  document.addEventListener('click',close);
+  // close on Escape
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); });
+  // refresh checkmarks on lang change
+  window.refreshMenuLang=function(){
+    document.querySelectorAll('.mb-dd-item[data-action^="lang-"]').forEach(it=>{
+      const on = it.dataset.action === 'lang-'+LANG;
+      const chk=it.querySelector('.chk'); if(chk) chk.style.visibility = on?'visible':'hidden';
+    });
+  };
+})();
+
+function runMenuAction(action){
+  switch(action){
+    case 'pdf': openApp('pdf'); break;
+    case 'open-about': openApp('about'); break;
+    case 'open-contacts': openApp('contacts'); break;
+    case 'open-terminal': openApp('terminal'); break;
+    case 'github': window.open('https://github.com/matveipasynkov','_blank','noopener'); break;
+    case 'tab-profile': openApp('about'); activeTab='profile'; renderAboutTabs(); break;
+    case 'tab-experience': openApp('about'); activeTab='experience'; renderAboutTabs(); break;
+    case 'tab-skills': openApp('about'); activeTab='skills'; renderAboutTabs(); break;
+    case 'tab-education': openApp('about'); activeTab='education'; renderAboutTabs(); break;
+    case 'win-about': openApp('about'); break;
+    case 'win-terminal': openApp('terminal'); break;
+    case 'win-contacts': openApp('contacts'); break;
+    case 'lang-ru': applyLang('ru'); break;
+    case 'lang-en': applyLang('en'); break;
+    case 'help-terminal': openApp('terminal'); break;
+    case 'help-about': openApp('about'); activeTab='profile'; renderAboutTabs(); break;
+    /* ===== Apple menu / system ===== */
+    case 'about-this': openApp('about'); activeTab='profile'; renderAboutTabs(); break;
+    case 'lock': lockScreen(); break;
+    case 'logout': powerDialog('logout'); break;
+    case 'sleep': powerDialog('sleep'); break;
+    case 'restart': powerDialog('restart'); break;
+    case 'shutdown': powerDialog('shutdown'); break;
+  }
+}
+
+/* ================================================================ SYSTEM: login / lock / power */
+/* All power actions are simulated — it's a resume, not a real OS. They run a
+   short visual sequence (boot screen → desktop) so the interaction feels real. */
+let poweredOff = false;   // true while the machine is off/asleep
+
+function closeAllWindows(){
+  Object.keys(opened).forEach(app=>{
+    const o=opened[app]; if(o&&o.el){ o.el.remove(); }
+  });
+  for(const k in opened) delete opened[k];
+  updateDockDots();
+}
+
+/* Boot sequence — reused for cold boot, restart, wake-from-sleep, and after
+   power-on from the off state. Shows the Apple logo + progress bar, then
+   optionally opens About. */
+function bootSequence(opts={}){
+  opts=Object.assign({openAbout:true, withProgress:true, delay:0},opts);
+  const boot=document.getElementById('boot');
+  boot.classList.remove('hide','powering');
+  boot.querySelector('.bbar').style.display = opts.withProgress?'':'none';
+  // restart the progress animation
+  const fill=boot.querySelector('.bbar i');
+  if(fill){ fill.style.animation='none'; void fill.offsetWidth; fill.style.animation=''; }
+  setTimeout(()=>{
+    boot.classList.add('hide');
+    setTimeout(()=>{
+      boot.style.display='none';
+      if(opts.openAbout) openApp('about');
+    }, RM?0:600);
+  }, RM?200:(opts.withProgress?1500:900));
+}
+
+/* LOCK SCREEN — covers everything; any password unlocks (demo). */
+function lockScreen(){
+  const lock=document.getElementById('lockscreen');
+  refreshLockLabels();
+  // start the lock clock
+  startLockClock();
+  lock.classList.remove('fade');
+  lock.classList.add('show');
+  const inp=document.getElementById('lock-input');
+  inp.value=''; setTimeout(()=>inp.focus(),100);
+}
+function refreshLockLabels(){
+  const avatar=document.getElementById('lock-avatar');
+  const name=document.getElementById('lock-name');
+  const inp=document.getElementById('lock-input');
+  const hint=document.getElementById('lock-hint');
+  if(avatar) avatar.textContent = L(DATA.profile.initials);
+  if(name) name.textContent = L(DATA.profile.name);
+  if(inp) inp.placeholder = LANG==='en'?'Enter Password':'Введите пароль';
+  if(hint) hint.textContent = LANG==='en'?'Type anything — it\'s a demo':'Введите любой пароль — это демо';
+}
+let lockClockTimer=null;
+function startLockClock(){
+  const t=document.getElementById('lock-time');
+  const d=document.getElementById('lock-date');
+  function tick(){
+    const now=new Date();
+    const hh=String(now.getHours()).padStart(2,'0'), mm=String(now.getMinutes()).padStart(2,'0');
+    if(t) t.textContent = hh+':'+mm;
+    if(d){
+      const days=LANG==='en'?['Sun','Mon','Tue','Wed','Thu','Fri','Sat']:['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+      const months=LANG==='en'?['January','February','March','April','May','June','July','August','September','October','November','December']:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+      d.textContent = days[now.getDay()]+', '+now.getDate()+' '+months[now.getMonth()];
+    }
+  }
+  tick();
+  clearInterval(lockClockTimer);
+  lockClockTimer=setInterval(tick,1000);
+}
+function unlock(){
+  const lock=document.getElementById('lockscreen');
+  if(RM){ lock.classList.remove('show'); clearInterval(lockClockTimer); return; }
+  lock.classList.add('fade');
+  setTimeout(()=>{ lock.classList.remove('show','fade'); clearInterval(lockClockTimer); }, 400);
+}
+/* shake the password box on "wrong" input (we accept anything, but it reads better) */
+function shakeLock(){
+  const form=document.getElementById('lock-form');
+  if(!form||RM) return;
+  form.classList.remove('lock-shake'); void form.offsetWidth; form.classList.add('lock-shake');
+}
+document.getElementById('lock-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const inp=document.getElementById('lock-input');
+  if(!inp.value){ shakeLock(); return; }   // empty = gentle nudge
+  unlock();
+});
+
+/* POWER DIALOG — confirm before shutdown / restart / sleep / logout. */
+let pendingPower=null;
+const POWER_STRINGS={
+  shutdown:{title:{ru:'Выключить Mac?',en:'Shut Down Mac?'},desc:{ru:'Все окна будут закрыты.',en:'All windows will be closed.'},btn:{ru:'Выключить',en:'Shut Down'}},
+  restart:{title:{ru:'Перезагрузить Mac?',en:'Restart Mac?'},desc:{ru:'Все окна будут закрыты.',en:'All windows will be closed.'},btn:{ru:'Перезагрузить',en:'Restart'}},
+  sleep:{title:{ru:'Усыпить Mac?',en:'Put Mac to Sleep?'},desc:{ru:'Мак проснётся после входа.',en:'Mac will wake after you log in.'},btn:{ru:'Сон',en:'Sleep'}},
+  logout:{title:{ru:'Выйти из системы?',en:'Log Out?'},desc:{ru:'Все окна будут закрыты. Нужен повторный вход.',en:'All windows will be closed. You\'ll need to log back in.'},btn:{ru:'Выйти',en:'Log Out'}},
+};
+function powerDialog(mode){
+  pendingPower=mode;
+  const s=POWER_STRINGS[mode]; if(!s) return;
+  const ov=document.getElementById('power-overlay');
+  document.getElementById('power-title').textContent=L(s.title);
+  document.getElementById('power-desc').textContent=L(s.desc);
+  document.getElementById('power-confirm').textContent=L(s.btn);
+  ov.classList.add('show');
+}
+function closePowerDialog(){
+  document.getElementById('power-overlay').classList.remove('show');
+  pendingPower=null;
+}
+document.getElementById('power-cancel').addEventListener('click',closePowerDialog);
+document.getElementById('power-confirm').addEventListener('click',()=>{
+  const mode=pendingPower; closePowerDialog(); if(!mode) return;
+  if(mode==='sleep'){
+    // sleep: show the off/black screen; any click wakes → lock screen → unlock
+    poweredOff=true;
+    const boot=document.getElementById('boot');
+    boot.style.display='flex';
+    boot.classList.remove('hide'); boot.classList.add('powering');
+    setTimeout(()=>{
+      // waking: go to lock screen instead of straight to desktop
+      boot.classList.add('hide');
+      setTimeout(()=>{ lockScreen(); poweredOff=false; }, RM?0:400);
+    }, RM?400:1200);
+    return;
+  }
+  if(mode==='logout'){
+    // log out: close windows + show lock screen (re-login)
+    closeAllWindows();
+    setTimeout(()=>lockScreen(), RM?0:300);
+    return;
+  }
+  // shutdown / restart: black screen with Apple logo, then boot back up
+  poweredOff=true;
+  const boot=document.getElementById('boot');
+  boot.style.display='flex';
+  boot.classList.remove('hide','powering');
+  boot.classList.add('powering');
+  closeAllWindows();
+  setTimeout(()=>{
+    poweredOff=false;
+    // restart boots back to desktop; shutdown shows lock screen (power-on → login)
+    if(mode==='restart'){ bootSequence({openAbout:true, withProgress:true}); }
+    else { /* shutdown: stay off until user clicks to power on */
+      boot.classList.add('hide');
+      setTimeout(()=>{ boot.style.display='none'; lockScreen(); }, RM?0:500);
+    }
+  }, RM?500:1400);
+});
+
+/* power-on: if the machine is off (shutdown state), click anywhere on the black
+   screen boots it back up. */
+document.getElementById('boot').addEventListener('click',()=>{
+  if(poweredOff){ poweredOff=false; bootSequence({openAbout:true, withProgress:true}); }
+});
+/* wake from sleep: if locked, Enter/click the screen unlocks (handled by lock form). */
+
+/* keyboard: ⌘W closes active window; ⌘K terminal; ⌘P print; ⌃⌘Q lock */
+document.addEventListener('keydown',e=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='w'){ e.preventDefault();
+    const aw=document.querySelector('.win.active'); if(aw) closeWin(aw.dataset.app);
+  }
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); openApp('terminal'); }
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='p'){ e.preventDefault(); openApp('pdf'); }
+  // Ctrl+Cmd+Q = lock screen (macOS). Use real modifiers so it doesn't clash.
+  if(e.ctrlKey&&e.metaKey&&e.key.toLowerCase()==='q'){ e.preventDefault(); lockScreen(); }
+  // Esc closes any open power dialog
+  if(e.key==='Escape' && document.getElementById('power-overlay').classList.contains('show')){ closePowerDialog(); }
+});
+
+/* ================================================================ INIT */
+applyLang(LANG);
+// applyLang runs before the menu IIFE defines refreshMenuLang; call again now
+// so checkmarks and (idempotent) print doc are correct on first load.
+if(window.refreshMenuLang) refreshMenuLang();
+buildPrintDoc();
+refreshLockLabels();
+// cold boot: Apple logo + progress bar → desktop with About window
+bootSequence({openAbout:true, withProgress:true});
+
+// keep windows inside viewport on resize
+addEventListener('resize',()=>{
+  Object.values(opened).forEach(o=>{
+    if(o.maximized){ o.el.style.width=(window.innerWidth-8)+'px'; o.el.style.height=(window.innerHeight-36-70)+'px'; }
+  });
+});
+</script>
+</body>
+</html>

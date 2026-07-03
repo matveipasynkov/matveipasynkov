@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+
+# editor / OS cruft
+*.swp
+Thumbs.db
+
+# local dev tooling (not part of the deployed site)
+.claude/
+.agents/
+skills-lock.json
+
+# backups
+index-old.html
+README.old.md
+
+# old neon-version assets & generator (the new site is fully self-contained)
+assets/
+tools/
