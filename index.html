@@ -392,6 +392,195 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:default}
   *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
 }
 
+/* ================================================================ IPHONE (mobile shell, ≤760px) */
+/* On phones the macOS desktop is hidden and replaced by a physical iPhone:
+   device frame → status bar → home screen (springboard) → full-screen apps.
+   #iphone-shell is display:none on desktop and only shown via the mobile media query. */
+#iphone-shell{display:none}
+
+/* the home-screen wallpaper reuses the desktop wallpaper tones */
+.iphone-device{
+  position:fixed;inset:0;display:flex;flex-direction:column;overflow:hidden;
+  background:
+    radial-gradient(120% 90% at 80% 0%, #ff6fae 0%, transparent 45%),
+    radial-gradient(140% 120% at 15% 20%, #5d4bd0 0%, transparent 55%),
+    radial-gradient(120% 120% at 60% 100%, #2a78d6 0%, transparent 60%),
+    linear-gradient(160deg,#2b1f5e 0%,#1a1640 100%);
+}
+
+/* iOS status bar */
+.ios-statusbar{
+  height:48px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px 0 30px;color:#fff;font-weight:600;font-size:15px;
+  text-shadow:0 1px 3px rgba(0,0,0,.25);position:relative;z-index:5}
+.ios-statusbar .is-time{font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.ios-statusbar .is-right{display:flex;align-items:center;gap:6px}
+.ios-statusbar .is-right svg{width:17px;height:17px;fill:#fff}
+.ios-statusbar .is-batt{display:flex;align-items:center;gap:2px}
+.ios-statusbar .is-batt-body{width:25px;height:12px;border:1.5px solid rgba(255,255,255,.6);border-radius:3px;
+  padding:1.5px;position:relative}
+.ios-statusbar .is-batt-body i{display:block;height:100%;width:70%;background:#fff;border-radius:1px}
+.ios-statusbar .is-batt-cap{width:2px;height:5px;background:rgba(255,255,255,.6);border-radius:0 1px 1px 0}
+
+/* home screen (springboard) */
+.ios-springboard{flex:1;display:flex;flex-direction:column;padding:14px 18px 12px;overflow-y:auto;
+  -webkit-overflow-scrolling:touch}
+.ios-widget{
+  background:rgba(255,255,255,.18);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:.5px solid rgba(255,255,255,.25);border-radius:20px;padding:16px 18px;margin-bottom:22px;
+  color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.ios-widget .iw-hello{font-size:13px;opacity:.85;font-weight:500}
+.ios-widget .iw-name{font-size:26px;font-weight:700;letter-spacing:-.02em;margin:2px 0 4px}
+.ios-widget .iw-role{font-size:13px;opacity:.92}
+.ios-widget .iw-role b{font-weight:700}
+.ios-widget .iw-stats{display:flex;gap:14px;margin-top:12px;font-size:11px;opacity:.9}
+.ios-widget .iw-stats span b{font-weight:700;font-size:13px;display:block}
+
+/* app grid */
+.ios-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px 10px;padding-bottom:10px}
+.ios-app{display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
+.ios-app .ia-icon{
+  width:58px;height:58px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px -4px rgba(0,0,0,.4);transition:transform .15s}
+.ios-app .ia-icon svg{width:34px;height:34px}
+.ios-app:active .ia-icon{transform:scale(.9)}
+.ios-app .ia-label{color:#fff;font-size:11px;font-weight:500;text-shadow:0 1px 3px rgba(0,0,0,.5);
+  text-align:center;line-height:1.2;max-width:64px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* home indicator */
+.ios-homeindicator{height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;padding-bottom:6px}
+.ios-homeindicator i{width:134px;height:5px;background:rgba(255,255,255,.85);border-radius:3px}
+
+/* dock on the home screen (frequently used apps) */
+.ios-dock{
+  background:rgba(255,255,255,.18);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border:.5px solid rgba(255,255,255,.25);border-radius:32px;margin:8px 12px 0;
+  padding:10px 12px;display:flex;justify-content:center;gap:18px}
+.ios-dock .ios-app .ia-icon{width:54px;height:54px}
+
+/* full-screen app container */
+.ios-app-screen{
+  position:absolute;inset:0;background:#f2f2f7;z-index:20;display:none;flex-direction:column;
+  transform:translateX(100%);transition:transform .3s var(--ease);overflow:hidden}
+.ios-app-screen.open{display:flex;transform:translateX(0)}
+.ios-app-screen.closing{transform:translateX(100%)}
+/* iOS-style nav bar at top of each app */
+.ios-navbar{
+  height:92px;flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;
+  padding:0 16px 12px;background:rgba(242,242,247,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:.5px solid rgba(0,0,0,.1);position:relative;z-index:2}
+.ios-navbar .in-back{color:var(--accent);font-size:17px;font-weight:400;display:flex;align-items:center;gap:2px;
+  background:none;border:none;cursor:pointer;padding:4px 0;min-width:60px}
+.ios-navbar .in-back:active{opacity:.4}
+.ios-navbar .in-back svg{width:12px;height:21px;fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.ios-navbar .in-title{font-size:17px;font-weight:600;color:var(--ink);max-width:60%;text-align:center;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ios-navbar .in-action{color:var(--accent);font-size:17px;font-weight:600;background:none;border:none;
+  cursor:pointer;min-width:60px;text-align:right;padding:4px 0}
+.ios-navbar .in-action:active{opacity:.4}
+/* spacer to balance the back button when there's no right action */
+.ios-navbar .in-spacer{min-width:60px}
+.ios-app-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative;z-index:1}
+.ios-app-body.has-homeindicator{padding-bottom:24px}
+
+/* iOS app content styles (Settings/Contacts/Terminal) */
+.ph-tabs{display:flex;background:rgba(242,242,247,.9);position:sticky;top:0;z-index:3;
+  border-bottom:.5px solid rgba(0,0,0,.1);padding:8px 12px;gap:6px;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.ph-tab{flex:1;padding:8px 4px;font-size:13px;font-weight:500;color:var(--ink-2);background:none;border:none;
+  border-radius:9px;cursor:pointer;text-align:center}
+.ph-tab.active{background:var(--accent);color:#fff;font-weight:600}
+.ph-content{padding:18px 16px 30px}
+/* profile */
+.ph-profile{text-align:center}
+.ph-avatar{width:88px;height:88px;border-radius:50%;margin:6px auto 14px;
+  background:linear-gradient(135deg,#7d6cff,#3da5ff);display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:32px;box-shadow:0 8px 24px -6px rgba(61,165,255,.6)}
+.ph-profile h1{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.ph-role{font-size:14px;color:var(--muted);margin:3px 0 16px}
+.ph-role b{color:var(--accent)}
+.ph-lead{font-size:14px;color:var(--ink-2);line-height:1.55;text-align:left;max-width:48ch;margin:0 auto 18px}
+.ph-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.ph-stat{background:#fff;border-radius:12px;padding:14px;text-align:center;
+  border:.5px solid rgba(0,0,0,.06)}
+.ph-stat b{display:block;font-size:20px;color:var(--accent-2);font-weight:800}
+.ph-stat span{font-size:11px;color:var(--muted)}
+/* experience cards */
+.ph-card{background:#fff;border-radius:14px;padding:16px;margin-bottom:12px;border:.5px solid rgba(0,0,0,.06)}
+.ph-card.feature{border:1px solid rgba(10,132,255,.25)}
+.ph-card-h{display:flex;gap:12px;align-items:center;margin-bottom:6px}
+.ph-logo{width:38px;height:38px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;color:#fff;background:linear-gradient(135deg,#ff5f57,#febc2e)}
+.ph-logo.alt{background:rgba(0,0,0,.08);color:var(--ink)}
+.ph-logo.hh{background:linear-gradient(135deg,#d6001c,#ff5050)}
+.ph-card-h h3{font-size:15px;font-weight:600;line-height:1.2}
+.ph-co{font-size:12px;color:var(--accent)}
+.ph-tag{font-family:var(--mono);font-size:10px;color:var(--muted);background:rgba(0,0,0,.05);
+  display:inline-block;padding:2px 8px;border-radius:99px;margin-bottom:4px}
+.ph-period{font-family:var(--mono);font-size:10px;color:var(--dim);margin-bottom:10px}
+.ph-bullets{list-style:none;margin:0;padding:0}
+.ph-bullets li{font-size:13px;color:var(--ink-2);line-height:1.5;padding-left:14px;position:relative;margin-bottom:6px}
+.ph-bullets li::before{content:'';position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+/* skills */
+.ph-skill-g{background:#fff;border-radius:14px;padding:14px 16px;margin-bottom:12px;border:.5px solid rgba(0,0,0,.06)}
+.ph-gname{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.ph-chips{display:flex;flex-wrap:wrap;gap:7px}
+.ph-chip{font-size:12px;padding:5px 11px;border-radius:99px;background:rgba(10,132,255,.08);color:var(--ink-2)}
+/* education */
+.ph-edu-i{padding-bottom:14px;border-left:2px solid var(--accent);padding-left:14px;margin-left:4px;margin-bottom:4px;position:relative}
+.ph-edu-i::before{content:'';position:absolute;left:-7px;top:2px;width:11px;height:11px;border-radius:50%;background:#fff;border:2px solid var(--accent)}
+.ph-when{font-family:var(--mono);font-size:10px;color:var(--dim)}
+.ph-edu-i h4{font-size:14px;font-weight:600;margin:3px 0}
+.ph-edu-i p{font-size:12px;color:var(--muted);line-height:1.5}
+/* contacts */
+.ph-me{display:flex;align-items:center;gap:14px;padding:20px 16px;border-bottom:.5px solid rgba(0,0,0,.08)}
+.ph-me .ph-avatar.sm{width:60px;height:60px;font-size:22px;margin:0}
+.ph-me h2{font-size:19px;font-weight:700}
+.ph-contacts{padding:8px 12px}
+.ph-contact{display:flex;align-items:center;gap:14px;width:100%;padding:12px 4px;
+  background:none;border:none;border-bottom:.5px solid rgba(0,0,0,.06);text-align:left;cursor:pointer}
+.ph-contact:active{background:rgba(0,0,0,.04)}
+.ph-contact:last-child{border-bottom:none}
+.ph-c-ic{width:36px;height:36px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.ph-c-info{display:flex;flex-direction:column;gap:1px}
+.ph-c-name{font-size:11px;color:var(--muted)}
+.ph-c-val{font-size:15px;color:var(--ink);font-family:var(--mono)}
+.ph-copy-hint{text-align:center;font-size:12px;color:var(--dim);padding:14px}
+
+/* app icon color variants */
+.ia-gradient-purple{background:linear-gradient(160deg,#7d6cff,#5e5ce6)}
+.ia-gradient-blue{background:linear-gradient(160deg,#3da5ff,#0a84ff)}
+.ia-black{background:linear-gradient(160deg,#2c2c3e,#1c1c2e)}
+.ia-white{background:linear-gradient(160deg,#fff,#e8e8ee)}
+.ia-orange{background:linear-gradient(160deg,#ff9a3d,#fe8a3d)}
+.ia-red{background:linear-gradient(160deg,#ff6b6b,#e63946)}
+.ia-green{background:linear-gradient(160deg,#34c759,#28c840)}
+.ia-gray{background:linear-gradient(160deg,#8e8e93,#6b6b85)}
+
+/* iPhone lock screen (mobile-specific; reuses desktop #lockscreen on desktop) */
+.ios-lock{
+  position:absolute;inset:0;z-index:50;display:none;flex-direction:column;align-items:center;
+  justify-content:flex-end;padding-bottom:42px;gap:14px;
+  background:linear-gradient(180deg,#1a1640 0%,#2b1f5e 50%,#3d2b8c 100%)}
+.ios-lock.show{display:flex;animation:lock-in .5s var(--ease)}
+.ios-lock .il-clock{position:absolute;top:14%;text-align:center;color:#fff}
+.ios-lock .il-time{font-size:84px;font-weight:200;letter-spacing:-.02em;line-height:1}
+.ios-lock .il-date{font-size:19px;font-weight:500;opacity:.95;margin-top:4px}
+.ios-lock .il-avatar{width:90px;height:90px;border-radius:50%;
+  background:linear-gradient(135deg,#7d6cff,#3da5ff);display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:800;font-size:32px;box-shadow:0 10px 40px -8px rgba(61,165,255,.7)}
+.ios-lock .il-name{color:#fff;font-size:20px;font-weight:600}
+.ios-lock .il-unlock{color:rgba(255,255,255,.7);font-size:13px;margin-top:8px}
+.ios-lock .il-homeindicator{position:absolute;bottom:8px}
+
+/* reveal the iPhone shell only on mobile */
+@media (max-width:760px){
+  #iphone-shell{display:block}
+  #desktop,#menubar,#dock-wrap,#windows{display:none!important}
+  body{overflow:hidden}
+}
+
 /* ================================================================ PRINT */
 /* ================================================================ MENUBAR DROPDOWN MENUS */
 .mb-menu{display:flex;gap:2px;position:relative}
@@ -490,6 +679,58 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:default}
     <div class="power-btns">
       <button class="power-btn" id="power-cancel">Отмена</button>
       <button class="power-btn danger" id="power-confirm">Выключить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== IPHONE SHELL (mobile only) ===== -->
+<div id="iphone-shell" aria-hidden="true">
+  <div class="iphone-device">
+    <!-- iOS status bar -->
+    <div class="ios-statusbar">
+      <span class="is-time" id="ios-time">9:41</span>
+      <span class="is-right">
+        <svg viewBox="0 0 18 14" aria-hidden="true"><path d="M15.5 7a5.5 5.5 0 0 1-10.95.7L2.5 7H.5l1.8 1.8A7.5 7.5 0 0 0 16.5 7h-1zm-12 0a5.5 5.5 0 0 1 10.95-.7L15.5 7h2l-1.8-1.8A7.5 7.5 0 0 0 1.5 7h2z"/></svg>
+        <span class="is-batt"><span class="is-batt-body"><i></i></span><span class="is-batt-cap"></span></span>
+      </span>
+    </div>
+
+    <!-- home screen / springboard -->
+    <div class="ios-springboard" id="ios-springboard">
+      <div class="ios-widget" id="ios-widget">
+        <div class="iw-hello" id="iw-hello">Привет,</div>
+        <div class="iw-name" id="iw-name">Матвей</div>
+        <div class="iw-role" id="iw-role">Project Manager <b>@ hh.ru</b></div>
+        <div class="iw-stats" id="iw-stats"></div>
+      </div>
+      <div class="ios-grid" id="ios-grid"></div>
+      <div class="ios-dock" id="ios-dock"></div>
+    </div>
+
+    <!-- home indicator -->
+    <div class="ios-homeindicator" id="ios-homeindicator" role="button" aria-label="Home"><i></i></div>
+
+    <!-- full-screen app containers (populated by JS) -->
+    <div class="ios-app-screen" id="ios-screen-about" aria-hidden="true">
+      <div class="ios-navbar"><button class="in-back" data-close><svg viewBox="0 0 12 21"><path d="M11 1L2 10.5 11 20"/></svg></button><span class="in-title" id="ios-about-title">Обо мне</span><span class="in-spacer"></span></div>
+      <div class="ios-app-body has-homeindicator" id="ios-about-body"></div>
+    </div>
+    <div class="ios-app-screen" id="ios-screen-contacts" aria-hidden="true">
+      <div class="ios-navbar"><button class="in-back" data-close><svg viewBox="0 0 12 21"><path d="M11 1L2 10.5 11 20"/></svg></button><span class="in-title" id="ios-contacts-title">Контакты</span><span class="in-spacer"></span></div>
+      <div class="ios-app-body has-homeindicator" id="ios-contacts-body"></div>
+    </div>
+    <div class="ios-app-screen" id="ios-screen-terminal" aria-hidden="true">
+      <div class="ios-navbar"><button class="in-back" data-close><svg viewBox="0 0 12 21"><path d="M11 1L2 10.5 11 20"/></svg></button><span class="in-title">Терминал</span><span class="in-spacer"></span></div>
+      <div class="ios-app-body has-homeindicator" id="ios-terminal-body"></div>
+    </div>
+
+    <!-- iPhone lock screen -->
+    <div class="ios-lock" id="ios-lock" aria-hidden="true">
+      <div class="il-clock"><div class="il-time" id="il-time">9:41</div><div class="il-date" id="il-date"></div></div>
+      <div class="il-avatar" id="il-avatar">МП</div>
+      <div class="il-name" id="il-name">Матвей Пасынков</div>
+      <div class="il-unlock" id="il-unlock">Нажмите, чтобы войти</div>
+      <div class="ios-homeindicator il-homeindicator"><i></i></div>
     </div>
   </div>
 </div>
@@ -758,10 +999,11 @@ function applyLang(l){
   // re-render dynamic windows
   if(opened.about) renderAboutTabs();
   if(opened.contacts) renderContactsDetail();
-  // keep menu checkmarks + print doc in sync with language
+  // keep menu checkmarks + print doc + phone shell in sync with language
   if(window.refreshMenuLang) refreshMenuLang();
   buildPrintDoc();
   refreshLockLabels();
+  if(window.refreshPhone) refreshPhone();
   // active app name in menu bar
   const aa=document.getElementById('mb-active-app');
   const activeWin=document.querySelector('.win.active');
@@ -1391,6 +1633,268 @@ document.addEventListener('keydown',e=>{
   if(e.key==='Escape' && document.getElementById('power-overlay').classList.contains('show')){ closePowerDialog(); }
 });
 
+/* ================================================================ IPHONE (mobile shell) */
+/* On phones the macOS desktop is replaced by an iPhone home screen + full-screen
+   apps. This module renders the springboard, app icons, and app screens, and
+   intercepts openApp() so the same dock/menu actions work on both shells. */
+(function(){
+  if(!isMobile()) return;   // desktop keeps using the macOS window manager
+
+  // ---- app icon registry (home screen + dock) -------------------------
+  const ICONS={
+    about:'<svg viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7z"/></svg>',
+    contacts:'<svg viewBox="0 0 24 24" fill="#fff"><rect x="4" y="3" width="16" height="18" rx="3" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="10" r="3.2" fill="#fff"/><path d="M7 17c.5-2.5 2.5-4 5-4s4.5 1.5 5 4z" fill="#fff"/></svg>',
+    terminal:'<svg viewBox="0 0 24 24" fill="none" stroke="#5fff9b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7l4 4-4 4M13 16h6"/></svg>',
+    pdf:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 3v10M8 9l4 4 4-4M5 19h14" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>',
+    github:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.2.67.8.56A11.51 11.51 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/></svg>',
+    lock:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M7 10V8a5 5 0 0110 0v2" fill="none" stroke="#fff" stroke-width="2"/><rect x="5" y="10" width="14" height="10" rx="2" fill="#fff"/></svg>',
+  };
+  const HOME_APPS=[
+    {id:'about', label:{ru:'Обо мне',en:'About'}, cls:'ia-gradient-blue', ic:ICONS.about},
+    {id:'contacts', label:{ru:'Контакты',en:'Contacts'}, cls:'ia-orange', ic:ICONS.contacts},
+    {id:'terminal', label:{ru:'Терминал',en:'Terminal'}, cls:'ia-black', ic:ICONS.terminal},
+    {id:'github', label:'GitHub', cls:'ia-gray', ic:ICONS.github, href:'https://github.com/matveipasynkov'},
+    {id:'pdf', label:{ru:'PDF',en:'PDF'}, cls:'ia-red', ic:ICONS.pdf},
+    {id:'lock', label:{ru:'Блок',en:'Lock'}, cls:'ia-gray', ic:ICONS.lock},
+  ];
+  const DOCK_APPS=['about','contacts','terminal'];
+
+  // ---- home screen render --------------------------------------------
+  function renderHome(){
+    // widget
+    const p=DATA.profile;
+    document.getElementById('iw-hello').textContent = LANG==='en'?'Hi,':'Привет,';
+    document.getElementById('iw-name').textContent = L(p.name).split(' ')[0];
+    document.getElementById('iw-role').innerHTML = L(p.role)+' <b>@ '+p.at+'</b>';
+    document.getElementById('iw-stats').innerHTML = p.stats.map(s=>
+      `<span>${L(s.lbl)}<b>${L(s.num)}</b></span>`).join('');
+    // grid
+    const grid=document.getElementById('ios-grid');
+    grid.innerHTML = HOME_APPS.map(a=>{
+      const lbl = typeof a.label==='string'?a.label:L(a.label);
+      if(a.href) return `<a class="ios-app" href="${a.href}" target="_blank" rel="noopener">
+        <span class="ia-icon ${a.cls}">${a.ic}</span><span class="ia-label">${lbl}</span></a>`;
+      return `<button class="ios-app" data-app="${a.id}">
+        <span class="ia-icon ${a.cls}">${a.ic}</span><span class="ia-label">${lbl}</span></button>`;
+    }).join('');
+    grid.querySelectorAll('.ios-app[data-app]').forEach(b=>b.addEventListener('click',()=>phoneOpenApp(b.dataset.app)));
+    // dock
+    const dock=document.getElementById('ios-dock');
+    dock.innerHTML = DOCK_APPS.map(id=>{
+      const a=HOME_APPS.find(x=>x.id===id); const lbl=typeof a.label==='string'?a.label:L(a.label);
+      return `<button class="ios-app" data-app="${a.id}">
+        <span class="ia-icon ${a.cls}">${a.ic}</span><span class="ia-label">${lbl}</span></button>`;
+    }).join('');
+    dock.querySelectorAll('.ios-app[data-app]').forEach(b=>b.addEventListener('click',()=>phoneOpenApp(b.dataset.app)));
+  }
+
+  // ---- app open / close (full-screen slide) ---------------------------
+  let phoneStack=[];
+  function phoneOpenApp(id){
+    if(id==='pdf'){ buildPrintDoc(); window.print(); return; }
+    if(id==='lock'){ phoneLock(); return; }
+    if(id==='github'){ window.open('https://github.com/matveipasynkov','_blank','noopener'); return; }
+    const screen=document.getElementById('ios-screen-'+id);
+    if(!screen) return;
+    // render content into the screen
+    if(id==='about') renderPhoneAbout();
+    else if(id==='contacts') renderPhoneContacts();
+    else if(id==='terminal') renderPhoneTerminal();
+    screen.style.display='flex';
+    // force reflow then animate in
+    void screen.offsetWidth;
+    screen.classList.add('open'); screen.classList.remove('closing');
+    screen.setAttribute('aria-hidden','false');
+    phoneStack.push(id);
+  }
+  function phoneCloseApp(id){
+    const screen=document.getElementById('ios-screen-'+id);
+    if(!screen) return;
+    if(RM){ screen.classList.remove('open'); screen.style.display='none'; }
+    else { screen.classList.add('closing');
+      screen.addEventListener('transitionend',()=>{ screen.classList.remove('open','closing'); screen.style.display='none'; },{once:true}); }
+    screen.setAttribute('aria-hidden','true');
+    phoneStack = phoneStack.filter(x=>x!==id);
+  }
+  // wire all back buttons + home indicator
+  document.querySelectorAll('.ios-app-screen [data-close]').forEach(b=>{
+    b.addEventListener('click',()=>{ const s=b.closest('.ios-app-screen'); if(s) phoneCloseApp(s.id.replace('ios-screen-','')); });
+  });
+  document.getElementById('ios-homeindicator').addEventListener('click',()=>{
+    // home: close the topmost app
+    phoneStack.slice().forEach(id=>phoneCloseApp(id));
+  });
+
+  // ---- ABOUT (iOS Settings-style segmented tabs) ----------------------
+  let pAboutTab='profile';
+  function renderPhoneAbout(){
+    document.getElementById('ios-about-title').textContent = L({ru:'Обо мне',en:'About'});
+    const body=document.getElementById('ios-about-body');
+    const tabs=[
+      {id:'profile',ru:'Профиль',en:'Profile'},
+      {id:'experience',ru:'Опыт',en:'Experience'},
+      {id:'skills',ru:'Навыки',en:'Skills'},
+      {id:'education',ru:'Образ.',en:'Edu.'},
+    ];
+    body.innerHTML = `
+      <div class="ph-tabs">${tabs.map(t=>`<button class="ph-tab ${t.id===pAboutTab?'active':''}" data-t="${t.id}">${L(t)}</button>`).join('')}</div>
+      <div class="ph-content">${phAboutTab(pAboutTab)}</div>`;
+    body.querySelectorAll('.ph-tab').forEach(b=>b.addEventListener('click',()=>{pAboutTab=b.dataset.t;renderPhoneAbout();body.scrollTop=0;}));
+  }
+  function phAboutTab(id){
+    if(id==='profile'){
+      const p=DATA.profile;
+      return `<div class="ph-profile">
+        <div class="ph-avatar">${L(p.initials)}</div>
+        <h1>${L(p.name)}</h1>
+        <div class="ph-role">${L(p.role)} <b>@ ${p.at}</b></div>
+        <p class="ph-lead">${L(p.lead)}</p>
+        <div class="ph-stats">${p.stats.map(s=>`<div class="ph-stat"><b>${L(s.num)}</b><span>${L(s.lbl)}</span></div>`).join('')}</div>
+      </div>`;
+    }
+    if(id==='experience'){
+      return DATA.experience.map(e=>`<div class="ph-card ${e.feature?'feature':''}">
+        <div class="ph-card-h"><span class="ph-logo ${e.cls||''}">${L(e.logo)}</span>
+          <div><h3>${L(e.title)}</h3><div class="ph-co">${typeof e.co==='string'?e.co:L(e.co)}</div></div></div>
+        <div class="ph-tag">${L(e.tag)}</div>
+        <div class="ph-period">${L(e.period)}</div>
+        <ul class="ph-bullets">${e.bullets.map(b=>`<li>${L(b)}</li>`).join('')}</ul>
+      </div>`).join('');
+    }
+    if(id==='skills'){
+      return DATA.skills.map(g=>`<div class="ph-skill-g"><div class="ph-gname">${L(g.g)}</div>
+        <div class="ph-chips">${g.items.map(c=>`<span class="ph-chip">${L(c)}</span>`).join('')}</div></div>`).join('');
+    }
+    if(id==='education'){
+      const ed=DATA.education;
+      return `<div class="ph-edu">${ed.timeline.map(t=>`<div class="ph-edu-i"><div class="ph-when">${L(t.when)}</div>
+        <h4>${L(t.h)}</h4><p>${L(t.p)}</p></div>`).join('')}</div>
+        <div class="ph-skill-g"><div class="ph-gname">${L({ru:'Олимпиады',en:'Olympiads'})}</div>
+        <div class="ph-chips">${ed.olympiads.map(a=>`<span class="ph-chip">${a.m} ${L(a.t)}</span>`).join('')}</div></div>
+        <div class="ph-skill-g"><div class="ph-gname">${L({ru:'Курсы',en:'Courses'})}</div>
+        <div class="ph-chips">${ed.courses.map(a=>`<span class="ph-chip">${L(a)}</span>`).join('')}</div></div>`;
+    }
+    return '';
+  }
+
+  // ---- CONTACTS (iOS list, tap to copy) -------------------------------
+  function renderPhoneContacts(){
+    document.getElementById('ios-contacts-title').textContent = L({ru:'Контакты',en:'Contacts'});
+    const body=document.getElementById('ios-contacts-body');
+    body.innerHTML = `<div class="ph-me">
+        <div class="ph-avatar sm">${L(DATA.profile.initials)}</div>
+        <div><h2>${L(DATA.profile.name)}</h2><div class="ph-role">${L(DATA.profile.role)} @ ${DATA.profile.at}</div></div>
+      </div>
+      <div class="ph-contacts">${DATA.contacts.map(c=>`
+        <button class="ph-contact" data-copy="${c.copy}" data-name="${L(c.name)}">
+          <span class="ph-c-ic" style="background:${c.color}">${c.key==='email'||c.key==='phone'?'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2">'+c.ic+'</svg>':'<svg viewBox="0 0 24 24" width="16" height="16" fill="#fff">'+c.ic+'</svg>'}</span>
+          <span class="ph-c-info"><span class="ph-c-name">${L(c.name)}</span><span class="ph-c-val">${c.val}</span></span>
+        </button>`).join('')}</div>
+      <p class="ph-copy-hint">${LANG==='en'?'Tap a contact to copy':'Нажмите на контакт, чтобы копировать'}</p>`;
+    body.querySelectorAll('.ph-contact').forEach(b=>b.addEventListener('click',()=>{
+      navigator.clipboard.writeText(b.dataset.copy).then(()=>toast((LANG==='en'?'Copied: ':'Скопировано: ')+b.dataset.name)).catch(()=>{});
+    }));
+  }
+
+  // ---- TERMINAL (mobile terminal) -------------------------------------
+  function renderPhoneTerminal(){
+    const body=document.getElementById('ios-terminal-body');
+    body.innerHTML=`<div class="terminal" id="ph-term" style="height:100%;padding-top:10px"></div>`;
+    const term=document.getElementById('ph-term');
+    const state={hist:[],hi:-1};
+    function prompt(){return `<span class="prompt"><span class="user">matvey</span><span class="at">@</span><span class="host">hh.ru</span> <span class="path">~</span> %</span> `;}
+    function print(html){const l=el(`<div class="ln">${html}</div>`);term.appendChild(l);term.scrollTop=term.scrollHeight;}
+    function escape(s){return s.replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+    function inputLine(){
+      const line=el(`<div class="term-input-line">${prompt()}<input class="term-input" autocomplete="off" spellcheck="false"></div>`);
+      term.appendChild(line);const inp=line.querySelector('input');setTimeout(()=>inp.focus(),50);term.scrollTop=term.scrollHeight;
+      inp.addEventListener('keydown',e=>{
+        if(e.key==='Enter'){const cmd=inp.value;inp.disabled=true;
+          line.outerHTML=`<div class="ln">${prompt()}${escape(cmd)}</div>`;state.hist.unshift(cmd);state.hi=-1;run(cmd);}
+        else if(e.key==='ArrowUp'){e.preventDefault();if(state.hi<state.hist.length-1){state.hi++;inp.value=state.hist[state.hi]||'';}}
+        else if(e.key==='ArrowDown'){e.preventDefault();if(state.hi>0){state.hi--;inp.value=state.hist[state.hi]||'';}else{state.hi=-1;inp.value='';}}
+      });
+    }
+    function run(raw){
+      const cmd=raw.trim();const[name,...args]=cmd.split(/\s+/);
+      const c=(ru,en)=>LANG==='en'?en:ru;
+      switch(name){
+        case '':break;
+        case 'help':print(`<span class="dim">${c('Команды:','Commands:')} help, ls, cat, open, whoami, neofetch, clear</span>`);break;
+        case 'ls':print(`about.txt  experience.txt  skills.txt  education.txt  contacts.txt`);break;
+        case 'cat':{const f=args[0];const key=(f||'').replace('.txt','');
+          const files={about:DATA.profile.lead,contacts:DATA.contacts.map(x=>x.name+': '+x.val).join('\n'),
+            skills:DATA.skills.map(g=>L(g.g)+': '+g.items.map(L).join(', ')).join('\n')};
+          if(files[key])print(escape(L(files[key])).replace(/\n/g,'<br>'));
+          else print(`<span class="err">cat: ${c('нет файла','no file')}: ${f||''}</span>`);break;}
+        case 'open':{const a=args[0];
+          if(['about','contacts','terminal'].includes(a)){phoneCloseApp('terminal');setTimeout(()=>phoneOpenApp(a),RM?0:250);print(`<span class="ok">${c('открываю','opening')} ${a}</span>`);}
+          else if(['experience','skills','education'].includes(a)){print(`<span class="err">${c('открой about','open about first')}</span>`);}
+          else print(`<span class="err">open: ${a||''}</span>`);break;}
+        case 'whoami':print('matvey');break;
+        case 'neofetch':print(`<span class="ok">matvey</span>@<span class="host">hh.ru</span>
+<span class="dim">Role</span>: Project Manager
+<span class="dim">Stack</span>: SQL, Python, Power BI
+<span class="dim">Edu</span>: НИУ ВШЭ (top-4%)`);break;
+        case 'clear':term.innerHTML='';break;
+        case 'echo':print(escape(args.join(' ')));break;
+        case 'pwd':print('/Users/matvey');break;
+        default:print(`<span class="err">command not found: ${escape(name)}</span>`);
+      }
+      inputLine();
+    }
+    print(`<span class="dim">${c('Введите help','Type help')}</span>`);
+    inputLine();
+    term.addEventListener('click',()=>{const i=term.querySelector('.term-input:not([disabled])');if(i)i.focus();});
+  }
+
+  // ---- phone lock screen ----------------------------------------------
+  function phoneLock(){
+    const lock=document.getElementById('ios-lock');
+    refreshPhoneLock();
+    lock.classList.add('show');
+  }
+  function refreshPhoneLock(){
+    const now=new Date();
+    const hh=String(now.getHours()).padStart(2,'0'),mm=String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('il-time').textContent=hh+':'+mm;
+    const d=LANG==='en'?['Sun','Mon','Tue','Wed','Thu','Fri','Sat']:['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+    const mo=LANG==='en'?['January','February','March','April','May','June','July','August','September','October','November','December']:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+    document.getElementById('il-date').textContent=d[now.getDay()]+', '+now.getDate()+' '+mo[now.getMonth()];
+    document.getElementById('il-avatar').textContent=L(DATA.profile.initials);
+    document.getElementById('il-name').textContent=L(DATA.profile.name);
+    document.getElementById('il-unlock').textContent=LANG==='en'?'Tap to unlock':'Нажмите, чтобы войти';
+  }
+  document.getElementById('ios-lock').addEventListener('click',()=>{
+    document.getElementById('ios-lock').classList.remove('show');
+  });
+
+  // ---- iOS status bar clock -------------------------------------------
+  function iosClock(){
+    const now=new Date();
+    const h=String(now.getHours()).padStart(2,'0'),m=String(now.getMinutes()).padStart(2,'0');
+    document.getElementById('ios-time').textContent=h+':'+m;
+  }
+  iosClock();setInterval(iosClock,1000*15);
+
+  // ---- intercept openApp so menu/dock actions route to phone shell ----
+  window.openApp = function(app){
+    if(app==='pdf'){ buildPrintDoc(); window.print(); return; }
+    phoneOpenApp(app);
+  };
+
+  // ---- re-render on language change -----------------------------------
+  window.refreshPhone=function(){
+    renderHome();
+    if(phoneStack.includes('about')) renderPhoneAbout();
+    if(phoneStack.includes('contacts')) renderPhoneContacts();
+    if(document.getElementById('ios-lock').classList.contains('show')) refreshPhoneLock();
+  };
+
+  // ---- initial render --------------------------------------------------
+  renderHome();
+})();
+
 /* ================================================================ INIT */
 applyLang(LANG);
 // applyLang runs before the menu IIFE defines refreshMenuLang; call again now
@@ -1398,8 +1902,13 @@ applyLang(LANG);
 if(window.refreshMenuLang) refreshMenuLang();
 buildPrintDoc();
 refreshLockLabels();
-// cold boot: Apple logo + progress bar → desktop with About window
-bootSequence({openAbout:true, withProgress:true});
+if(isMobile()){
+  // mobile: iPhone home screen is already rendered by the phone IIFE; no boot.
+  document.getElementById('boot').style.display='none';
+} else {
+  // desktop cold boot: Apple logo + progress bar → About window
+  bootSequence({openAbout:true, withProgress:true});
+}
 
 // keep windows inside viewport on resize
 addEventListener('resize',()=>{
