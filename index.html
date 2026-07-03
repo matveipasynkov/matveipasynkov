@@ -214,7 +214,6 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:default}
 .bullets{list-style:none;display:flex;flex-direction:column;gap:6px}
 .bullets li{font-size:13px;color:var(--ink-2);line-height:1.5;padding-left:16px;position:relative}
 .bullets li::before{content:'';position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
-.todo{color:var(--accent-2);font-weight:600}
 
 /* skills */
 .skill-group{margin-bottom:18px}
@@ -835,12 +834,12 @@ const DATA = {
         en:'Lead growth initiatives end-to-end with sales, analytics and IT — from discovery and hypothesis to a shipped outcome.'},
      ]},
     {logo:'Ok', cls:'alt', title:{ru:'Бизнес-аналитик',en:'Business Analyst'}, co:'Okkam (ex. dentsu Russia)',
-     tag:{ru:'апр 2025 — наст.',en:'Apr 2025 — now'}, period:{ru:'СМИ · маркетинг · реклама · BTL · PR',en:'Media · marketing · advertising · BTL · PR'},
+     tag:{ru:'апр 2025 — июн 2026',en:'Apr 2025 — Jun 2026'}, period:{ru:'СМИ · маркетинг · реклама · BTL · PR',en:'Media · marketing · advertising · BTL · PR'},
      bullets:[
        {ru:'Собираю маркетинговые и growth-стратегии для портфеля клиентских компаний в медиа, рекламе, BTL и PR.',
         en:'Build marketing & growth strategies for a portfolio of client companies across media, advertising, BTL and PR.'},
-       {ru:'Автоматизирую бизнес-процессы на генеративном ИИ — снимаю <span class="todo">[~N часов/неделю]</span> ручной работы с команды из <span class="todo">[~N человек]</span>.',
-        en:'Automate business processes with generative AI — cutting manual work by <span class="todo">[~N hrs/week]</span> for a team of <span class="todo">[~N]</span>.'},
+       {ru:'Автоматизирую бизнес-процессы с применением генеративного ИИ.',
+        en:'Automate business processes using generative AI.'},
        {ru:'Проводю исследования рынка под ключ: гипотеза, сбор данных, анализ, выводы, готовые к принятию решения.',
         en:'Run end-to-end market research: hypothesis, data collection, analysis, and decision-ready conclusions.'},
        {ru:'Отвечаю за слой данных руками — Excel/VBA, Python (Pandas), SQL и BI-дашборды, на которых команда принимает решения.',
@@ -987,7 +986,7 @@ function buildPrintDoc(){
   const p=DATA.profile;
   const c=DATA.contacts;
   const escape=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  // strip HTML from bullet strings (they contain <span class="todo">)
+  // strip any HTML tags from bullet strings for the plain-text PDF
   const strip=s=>String(s).replace(/<[^>]+>/g,'');
   doc.innerHTML = `
     <div class="pd-head">
