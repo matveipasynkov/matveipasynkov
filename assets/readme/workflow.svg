@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="120" viewBox="0 0 1280 120" role="img" aria-labelledby="title"><title id="title">Workflow: understand the process, form a hypothesis, create a prototype, test and improve</title><rect width="1280" height="120" fill="#191b17"/>
+<g fill="#d4fd55" font-family="monospace" font-size="12"><text x="30" y="32">01 / EXPLORE</text><text x="352" y="32">02 / FRAME</text><text x="674" y="32">03 / BUILD</text><text x="996" y="32">04 / LEARN</text></g>
+<g fill="#f2f2e9" font-family="Arial,sans-serif" font-size="22"><text x="30" y="78">Understand the process</text><text x="352" y="78">Form a hypothesis</text><text x="674" y="78">Create a prototype</text><text x="996" y="78">Test &amp; improve</text></g>
+<g fill="#d4fd55" font-family="Arial,sans-serif" font-size="22"><text x="299" y="78">→</text><text x="621" y="78">→</text><text x="943" y="78">→</text></g></svg>

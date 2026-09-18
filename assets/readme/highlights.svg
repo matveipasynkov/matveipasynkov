@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="250" viewBox="0 0 1280 250" role="img" aria-labelledby="title"><title id="title">HSE average grade 8.89; top 4% of the cohort; silver medalist, Sber Risk Code 2026</title><rect width="1280" height="250" fill="#111210"/>
+<path d="M426 28v194M852 0v250" stroke="#34372e"/>
+<rect x="853" width="427" height="250" fill="#d4fd55"/>
+<g font-family="Arial,Helvetica,sans-serif">
+<g fill="#a0a497" font-family="monospace" font-size="13" letter-spacing="1.5"><text x="32" y="40">01 / ACADEMIC FOUNDATION</text><text x="460" y="40">02 / HSE COHORT</text></g>
+<g fill="#f2f2e9" font-size="92" letter-spacing="-6"><text x="27" y="153">8.89<tspan fill="#d4fd55" font-size="40"> ↗</tspan></text><text x="455" y="153">4<tspan fill="#d4fd55" font-size="52">%</tspan></text></g>
+<g fill="#a0a497" font-size="18"><text x="32" y="210">Average grade at HSE</text><text x="460" y="210">Top 4% of the cohort</text></g>
+<g fill="#111210"><text x="885" y="40" font-family="monospace" font-size="13" letter-spacing="1.5">03 / SBER · RISK CODE 2026</text><text x="880" y="153" font-size="92" letter-spacing="-6">02<tspan font-size="24" letter-spacing="0"> / SILVER</tspan></text><text x="885" y="210" font-size="18">Hackathon silver medalist</text></g></g></svg>
