@@ -1,8 +1,8 @@
+[![Matvey Pasynkov — Business × Engineering](assets/profile-banner.svg)](https://matveipasynkov.github.io/)
+
 <div align="center">
 
-# Matvey Pasynkov
-
-**Process Optimization · Business Analysis · AI Automation**
+**PROCESSES → DATA → IMPACT**
 
 Process Optimization Manager at **HeadHunter** · Software Engineering student at **HSE University**
 
@@ -16,14 +16,14 @@ I connect business analysis with software engineering to improve how teams work.
 
 At **HeadHunter**, I focus on sales processes and collaborate with sales, analytics, IT, and related teams. Previously at **OKKAM**, I worked on company strategies, market research, and business process automation using generative AI.
 
-### What I work on
+### 01 / What I work on
 
 - **Process improvement:** explore workflows, identify opportunities, and propose initiatives.
 - **Prototypes & internal tools:** turn hypotheses into simple prototypes and test new ideas.
 - **Analytics:** work with Excel, Python / Pandas, BI dashboards, and data visualization.
 - **Project delivery:** manage projects end to end and coordinate across teams.
 
-### Experience
+### 02 / Experience
 
 | Role | Organization | Period |
 | :--- | :--- | :--- |
@@ -34,7 +34,7 @@ At **HeadHunter**, I focus on sales processes and collaborate with sales, analyt
 
 **OKKAM** — strategy development, generative AI automation, market research, and data analysis with Excel, Python / Pandas, and BI dashboards.
 
-### Education & achievements
+### 03 / Education & achievements
 
 **HSE University — BSc in Software Engineering, Faculty of Computer Science**
 
@@ -48,7 +48,7 @@ At **HeadHunter**, I focus on sales processes and collaborate with sales, analyt
 
 Mathematical foundation: calculus, linear algebra, discrete mathematics, mathematical statistics, and probability theory.
 
-### Skills
+### 04 / Toolkit
 
 | Area | Focus |
 | :--- | :--- |
@@ -69,4 +69,4 @@ Mathematical foundation: calculus, linear algebra, discrete mathematics, mathema
 
 ---
 
-[Explore my interactive résumé →](https://matveipasynkov.github.io/) — macOS-inspired desktop, iPhone-style mobile view, RU / EN, and a printable résumé.
+**[Explore my website ↗](https://matveipasynkov.github.io/)** · [Let’s talk on Telegram ↗](https://t.me/matveipasynkov)
