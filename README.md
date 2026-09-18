@@ -1,59 +1,72 @@
+<div align="center">
+
 # Matvey Pasynkov
 
-> **Project Manager @ hh.ru** — a resume that lives inside a fake macOS desktop.
+**Process Optimization · Business Analysis · AI Automation**
 
-<table>
-<tr><td>📧</td><td><a href="mailto:mepasynkov@edu.hse.ru">mepasynkov@edu.hse.ru</a></td></tr>
-<tr><td>💬</td><td><a href="https://t.me/matveipasynkov">@matveipasynkov</a></td></tr>
-<tr><td>🐙</td><td><a href="https://github.com/matveipasynkov">github.com/matveipasynkov</a></td></tr>
-<tr><td>📞</td><td>+7 (968) 997-90-19</td></tr>
-</table>
+Process Optimization Manager at **HeadHunter** · Software Engineering student at **HSE University**
 
-This repository powers **[matveipasynkov.github.io](https://matveipasynkov.github.io)** (GitHub Pages). The site is a single, dependency-free `index.html` styled as a macOS desktop.
+[Website](https://matveipasynkov.github.io/) · [LinkedIn](https://www.linkedin.com/in/matthew-pasynkov-60986b409/) · [Telegram](https://t.me/matveipasynkov) · [Email](mailto:mepasynkov@edu.hse.ru)
 
-## ✨ What's inside
+</div>
 
-A full desktop-OS experience, built in vanilla HTML/CSS/JS (no frameworks, no build step — only Google Fonts):
+---
 
-- 🪟 **Window manager** — draggable, focusable windows with frosted-glass, traffic lights (close / minimize / maximize)
-- 🍎 **Menu bar** — Apple menu, live clock, working dropdown menus (File / View / Window / Help), RU/EN switch
-- 🚀 **Dock** — magnification, bounce-on-open, running-app indicators
-- 🔐 **Lock screen / login** — password field + shake feedback + live clock
-- ⏻ **Power** — Sleep / Restart / Shut Down / Log Out, with a real boot sequence
-- 💻 **Terminal** — a working shell: `help`, `ls`, `cat`, `open`, `whoami`, `neofetch`, `clear`…
-- 📇 **Contacts** — click-to-copy
-- 🖨️ **Print / PDF** — a clean one-page resume (no desktop chrome) via `⌘P`
+I connect business analysis with software engineering to improve how teams work. My work spans understanding processes, testing hypotheses, building internal tools, and turning data into useful dashboards.
 
-## 🗂️ Apps
+At **HeadHunter**, I focus on sales processes and collaborate with sales, analytics, IT, and related teams. Previously at **OKKAM**, I worked on company strategies, market research, and business process automation using generative AI.
 
-| App | Content |
-|-----|---------|
-| **About** | Profile, Experience, Skills, Education |
-| **Terminal** | Interactive shell over the resume content |
-| **Contacts** | Telegram, Email, Phone, GitHub |
+### What I work on
 
-## ⌨️ Shortcuts
+- **Process improvement:** explore workflows, identify opportunities, and propose initiatives.
+- **Prototypes & internal tools:** turn hypotheses into simple prototypes and test new ideas.
+- **Analytics:** work with Excel, Python / Pandas, BI dashboards, and data visualization.
+- **Project delivery:** manage projects end to end and coordinate across teams.
 
-| Key | Action |
-|-----|--------|
-| `⌘K` | Open Terminal |
-| `⌘P` | Print / Save as PDF |
-| `⌘W` | Close active window |
-| `⌃⌘Q` | Lock screen |
+### Experience
 
-## 👤 Profile
+| Role | Organization | Period |
+| :--- | :--- | :--- |
+| **Process Optimization Manager** | HeadHunter Group · hh.ru | Jun 2026 — present |
+| **Business Analyst** | OKKAM GROUP · ex. dentsu Russia | Apr 2025 — Jun 2026 |
 
-- 🎓 **HSE University** — Software Engineering (FCS), top-1 CS faculty in Russia · **top-4%** of cohort (2023–present)
-- 🏫 **Math School №179** — top-3 math school in Russia (2019–2023)
-- 💼 **Project Manager @ hh.ru** (since Jun 2026) — growth initiatives across sales, analytics and IT
-- 📊 **Business Analyst @ Okkam** (ex. dentsu Russia) — strategies, GenAI automation, market research, BI dashboards
-- 🏅 Prize-winner: Moscow Math Olympiad, Phystech Olympiad · Finalist: Sber «Code of Risk» hackathon
-- 🌐 **Languages:** Russian (native), English (C1)
+**HeadHunter** — sales process analysis, hypothesis testing, prototypes, internal tools, dashboards, and cross-functional projects.
 
-## 🛠️ Tech
+**OKKAM** — strategy development, generative AI automation, market research, and data analysis with Excel, Python / Pandas, and BI dashboards.
 
-The site is built with: **HTML, CSS (backdrop-filter, clamp typography, CSS animations), vanilla JavaScript** (pointer events, IntersectionObserver, a tiny window manager & terminal). Zero runtime dependencies.
+### Education & achievements
 
-## 📄 License
+**HSE University — BSc in Software Engineering, Faculty of Computer Science**
 
-Personal resume. Content © Matvey Pasynkov. The desktop-OS interaction patterns are free to learn from.
+2023 — present · Average grade **8.89** · **Top 4%** of the cohort · HSE Hack Club participant
+
+- 🥈 **Silver medalist — Sber “Risk Code” hackathon, 2026**
+- 🏅 Prize-winner — Moscow Mathematical Olympiad, 2022
+- 🏅 Prize-winner — Phystech Olympiad, 2022 & 2023
+- **Math School No. 179**, 2019–2023
+- Summer internships at **Eastbourne College**, 2016–2018
+
+Mathematical foundation: calculus, linear algebra, discrete mathematics, mathematical statistics, and probability theory.
+
+### Skills
+
+| Area | Focus |
+| :--- | :--- |
+| **Data & analytics** | Python · Pandas · Excel · BI dashboards · Market research |
+| **Processes & automation** | Generative AI · Process optimization · Prototyping · Hypothesis testing |
+| **Product & management** | Product management · Project management · Release planning · Software product management |
+
+<details>
+<summary><strong>Коротко обо мне — по-русски</strong></summary>
+
+Меня зовут Матвей Пасынков. Я менеджер по оптимизации процессов в HeadHunter и студент программной инженерии ФКН НИУ ВШЭ.
+
+Изучаю процессы продаж, нахожу точки роста, проверяю гипотезы и разрабатываю внутренние инструменты. Ранее работал бизнес-аналитиком в OKKAM: занимался стратегиями, исследованиями рынка и автоматизацией с помощью генеративного ИИ.
+
+Средний балл в ВШЭ — **8.89**, вхожу в **топ-4% потока**. Серебряный призёр хакатона Сбера **«Код риска» 2026**.
+
+</details>
+
+---
+
+[Explore my interactive résumé →](https://matveipasynkov.github.io/) — macOS-inspired desktop, iPhone-style mobile view, RU / EN, and a printable résumé.

@@ -2,9 +2,10 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<meta name="description" content="Матвей Пасынков — Project Manager @ hh.ru. Резюме в виде рабочего стола macOS." />
-<title>Матвей Пасынков — macOS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Матвей Пасынков — менеджер по оптимизации процессов в HeadHunter. Бизнес-анализ, AI-автоматизация и внутренние инструменты." />
+<title>Матвей Пасынков — процессы, аналитика и AI</title>
+<link rel="canonical" href="https://matveipasynkov.github.io/" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -700,7 +701,7 @@ button{font:inherit;color:inherit;background:none;border:none;cursor:default}
       <div class="ios-widget" id="ios-widget">
         <div class="iw-hello" id="iw-hello">Привет,</div>
         <div class="iw-name" id="iw-name">Матвей</div>
-        <div class="iw-role" id="iw-role">Project Manager <b>@ hh.ru</b></div>
+        <div class="iw-role" id="iw-role">Оптимизация процессов <b>@ hh.ru</b></div>
         <div class="iw-stats" id="iw-stats"></div>
       </div>
       <div class="ios-grid" id="ios-grid"></div>
@@ -1053,87 +1054,349 @@ function toast(msg){
 /* ================================================================ ABOUT APP + CONTENT DATA */
 let activeTab='profile';
 const DATA = {
-  profile:{
-    name:{ru:'Матвей Пасынков',en:'Matvey Pasynkov'},
-    initials:{ru:'МП',en:'MP'},
-    role:{ru:'Project Manager',en:'Project Manager'},
-    at:'hh.ru',
-    lead:{ru:'Бизнес-аналитик, ставший проджект-менеджером. Веду инициативы роста end-to-end вместе с командами продаж, аналитики и IT — от ресёрча и гипотезы до результата в проде.',
-          en:'Business analyst turned project manager. I lead growth initiatives end-to-end with sales, analytics and IT teams — from research and hypothesis to a shipped outcome.'},
-    stats:[
-      {num:'20', lbl:{ru:'лет',en:'years old'}},
-      {num:{ru:'топ-4%',en:'top-4%'}, lbl:{ru:'потока ВШЭ',en:'of HSE cohort'}},
-      {num:'1yr 8mo', lbl:{ru:'опыта',en:'experience'}},
-      {num:'C1', lbl:{ru:'английский',en:'English'}},
-    ],
+  "profile": {
+    "name": {
+      "ru": "Матвей Пасынков",
+      "en": "Matvey Pasynkov"
+    },
+    "initials": {
+      "ru": "МП",
+      "en": "MP"
+    },
+    "role": {
+      "ru": "Менеджер по оптимизации процессов",
+      "en": "Process Optimization Manager"
+    },
+    "at": "hh.ru",
+    "lead": {
+      "ru": "Соединяю бизнес-анализ, управление проектами и разработку внутренних инструментов. В HeadHunter изучаю процессы продаж, формулирую гипотезы и проверяю их с помощью прототипов. Ранее в OKKAM занимался стратегиями, исследованиями рынка и автоматизацией с генеративным ИИ. Учусь на программной инженерии в НИУ ВШЭ.",
+      "en": "I work at the intersection of business analysis, project management and internal tools. At HeadHunter, I explore sales processes, formulate hypotheses and test them through prototypes. Previously at OKKAM, I worked on strategy, market research and generative AI automation. I study Software Engineering at HSE University."
+    },
+    "stats": [
+      {
+        "num": "8.89",
+        "lbl": {
+          "ru": "средний балл ВШЭ",
+          "en": "HSE average grade"
+        }
+      },
+      {
+        "num": {
+          "ru": "Топ-4%",
+          "en": "Top 4%"
+        },
+        "lbl": {
+          "ru": "студентов потока",
+          "en": "of HSE cohort"
+        }
+      },
+      {
+        "num": {
+          "ru": "Серебро",
+          "en": "Silver"
+        },
+        "lbl": {
+          "ru": "«Код риска» · 2026",
+          "en": "Risk Code · 2026"
+        }
+      },
+      {
+        "num": "2023",
+        "lbl": {
+          "ru": "начало учёбы в ВШЭ",
+          "en": "started at HSE"
+        }
+      }
+    ]
   },
-  experience:[
-    {logo:'hh', cls:'hh', title:{ru:'Project Manager',en:'Project Manager'}, co:'hh.ru',
-     tag:{ru:'с июня 2026',en:'since Jun 2026'}, period:{ru:'Москва · настоящее время',en:'Moscow · present'},
-     feature:true,
-     bullets:[
-       {ru:'Веду инициативы роста end-to-end вместе с командами продаж, аналитики и IT — от ресёрча и гипотезы до результата в проде.',
-        en:'Lead growth initiatives end-to-end with sales, analytics and IT — from discovery and hypothesis to a shipped outcome.'},
-     ]},
-    {logo:'Ok', cls:'alt', title:{ru:'Бизнес-аналитик',en:'Business Analyst'}, co:'Okkam (ex. dentsu Russia)',
-     tag:{ru:'апр 2025 — июн 2026',en:'Apr 2025 — Jun 2026'}, period:{ru:'СМИ · маркетинг · реклама · BTL · PR',en:'Media · marketing · advertising · BTL · PR'},
-     bullets:[
-       {ru:'Собираю маркетинговые и growth-стратегии для портфеля клиентских компаний в медиа, рекламе, BTL и PR.',
-        en:'Build marketing & growth strategies for a portfolio of client companies across media, advertising, BTL and PR.'},
-       {ru:'Автоматизирую бизнес-процессы с применением генеративного ИИ.',
-        en:'Automate business processes using generative AI.'},
-       {ru:'Проводю исследования рынка под ключ: гипотеза, сбор данных, анализ, выводы, готовые к принятию решения.',
-        en:'Run end-to-end market research: hypothesis, data collection, analysis, and decision-ready conclusions.'},
-       {ru:'Отвечаю за слой данных руками — Excel/VBA, Python (Pandas), SQL и BI-дашборды, на которых команда принимает решения.',
-        en:'Own the data layer hands-on — Excel/VBA, Python (Pandas), SQL and BI dashboards the team runs decisions on.'},
-     ]},
-    {logo:{ru:'ВШ',en:'HSE'}, cls:'alt', title:{ru:'Учебный ассистент · Аналитик данных',en:'Teaching Assistant · Data Analyst'}, co:{ru:'НИУ ВШЭ',en:'HSE University'},
-     tag:{ru:'сен 2024 — наст.',en:'Sep 2024 — now'}, period:{ru:'ФКН · Программная инженерия',en:'FCS · Software Engineering'},
-     bullets:[
-       {ru:'Учебный ассистент потока: веду консультации и проверяю элементы контроля по мат. анализу, теории вероятностей, мат. статистике и линейной алгебре — в топ-4% потока.',
-        en:'Teaching assistant to a cohort: run consultations and check assessments across calculus, probability, statistics and linear algebra — ranked top-4%.'},
-       {ru:'Аналитик данных в учебных проектах — например, анализ недвижимости под ключ на Python (numpy, pandas, sklearn, scipy), SQL (DDL/DML, оконные функции, индексы) и Excel/VBA.',
-        en:'Data analyst on academic projects — e.g. real-estate analysis end-to-end with Python (numpy, pandas, sklearn, scipy), SQL (DDL/DML, window functions, indexes) and Excel/VBA.'},
-     ]},
+  "experience": [
+    {
+      "logo": "hh",
+      "cls": "hh",
+      "title": {
+        "ru": "Менеджер по оптимизации процессов",
+        "en": "Process Optimization Manager"
+      },
+      "co": "HeadHunter Group · hh.ru",
+      "tag": {
+        "ru": "июн 2026 — настоящее время",
+        "en": "Jun 2026 — present"
+      },
+      "period": {
+        "ru": "Москва · гибридный формат",
+        "en": "Moscow · hybrid"
+      },
+      "feature": true,
+      "bullets": [
+        {
+          "ru": "Изучаю процессы команд продаж, нахожу точки роста и предлагаю инициативы.",
+          "en": "Analyze sales team processes, identify opportunities for improvement and propose initiatives."
+        },
+        {
+          "ru": "Формулирую гипотезы, создаю простые прототипы и проверяю новые идеи.",
+          "en": "Formulate hypotheses, build simple prototypes and test new ideas."
+        },
+        {
+          "ru": "Разрабатываю внутренние инструменты и веду проекты от начала до завершения.",
+          "en": "Develop internal tools and manage projects end to end."
+        },
+        {
+          "ru": "Внедряю дашборды, визуализации и материалы для команд.",
+          "en": "Implement dashboards, visualizations and supporting materials."
+        },
+        {
+          "ru": "Работаю с командами продаж, аналитиками, IT и смежными подразделениями.",
+          "en": "Collaborate with sales teams, analysts, IT and other related teams."
+        }
+      ]
+    },
+    {
+      "logo": "Ok",
+      "cls": "alt",
+      "title": {
+        "ru": "Бизнес-аналитик",
+        "en": "Business Analyst"
+      },
+      "co": "OKKAM GROUP (ex. dentsu Russia)",
+      "tag": {
+        "ru": "апр 2025 — июн 2026",
+        "en": "Apr 2025 — Jun 2026"
+      },
+      "period": {
+        "ru": "Москва · работа в офисе",
+        "en": "Moscow · on-site"
+      },
+      "bullets": [
+        {
+          "ru": "Разрабатывал стратегии для компаний.",
+          "en": "Developed strategies for companies."
+        },
+        {
+          "ru": "Автоматизировал бизнес-процессы с помощью генеративного ИИ.",
+          "en": "Automated business processes using generative AI."
+        },
+        {
+          "ru": "Участвовал в исследованиях рынка и проводил их.",
+          "en": "Conducted and contributed to market research."
+        },
+        {
+          "ru": "Анализировал данные в Excel и Python (Pandas), работал с BI-дашбордами.",
+          "en": "Analyzed data using Excel and Python (Pandas), and worked with BI dashboards."
+        }
+      ]
+    }
   ],
-  skills:[
-    {g:{ru:'Аналитика и данные',en:'Analytics & Data'}, items:[
-      {ru:'Бизнес-анализ',en:'Business analysis'}, 'SQL', 'Python',
-      {ru:'A/B тесты',en:'A/B testing'}, {ru:'Мат. статистика',en:'Math statistics'}, 'Power BI', 'Excel / VBA']},
-    {g:{ru:'Продукт и управление',en:'Product & PM'}, items:[
-      {ru:'Постановка задач разработчикам',en:'Briefing devs'}, 'Agile Project Management',
-      {ru:'Стратегическое планирование',en:'Strategic planning'}, {ru:'Управление ожиданиями',en:'Managing expectations'},
-      {ru:'Бизнес-требования',en:'Business requirements'}]},
-    {g:{ru:'Инструменты',en:'Tools'}, items:['Atlassian Confluence','Draw.io','PowerPoint','Microsoft Office']},
-    {g:{ru:'Языки',en:'Languages'}, items:[{ru:'Русский — родной',en:'Russian — Native'},{ru:'Английский — C1',en:'English — C1'}]},
+  "skills": [
+    {
+      "g": {
+        "ru": "Аналитика и данные",
+        "en": "Analytics & data"
+      },
+      "items": [
+        {
+          "ru": "Бизнес-анализ",
+          "en": "Business analysis"
+        },
+        {
+          "ru": "Исследования рынка",
+          "en": "Market research"
+        },
+        "Python / Pandas",
+        "Excel",
+        {
+          "ru": "BI-дашборды",
+          "en": "BI dashboards"
+        },
+        {
+          "ru": "Визуализация данных",
+          "en": "Data visualization"
+        }
+      ]
+    },
+    {
+      "g": {
+        "ru": "Процессы и инструменты",
+        "en": "Processes & tools"
+      },
+      "items": [
+        {
+          "ru": "Оптимизация процессов",
+          "en": "Process optimization"
+        },
+        {
+          "ru": "Генеративный ИИ",
+          "en": "Generative AI"
+        },
+        {
+          "ru": "Автоматизация",
+          "en": "Automation"
+        },
+        {
+          "ru": "Прототипирование",
+          "en": "Prototyping"
+        },
+        {
+          "ru": "Проверка гипотез",
+          "en": "Hypothesis testing"
+        }
+      ]
+    },
+    {
+      "g": {
+        "ru": "Продукт и управление",
+        "en": "Product & management"
+      },
+      "items": [
+        {
+          "ru": "Управление продуктами",
+          "en": "Product management"
+        },
+        {
+          "ru": "Управление проектами",
+          "en": "Project management"
+        },
+        {
+          "ru": "Планирование релизов",
+          "en": "Release planning"
+        },
+        {
+          "ru": "Управление программными продуктами",
+          "en": "Software product management"
+        },
+        {
+          "ru": "Межкомандная работа",
+          "en": "Cross-functional collaboration"
+        }
+      ]
+    }
   ],
-  education:{
-    timeline:[
-      {when:{ru:'2023 — настоящее время',en:'2023 — present'}, h:{ru:'НИУ ВШЭ — Программная инженерия (ФКН)',en:'HSE University — Software Engineering (FCS)'},
-       p:{ru:'Топ-1 факультет по компьютерным наукам в России. Топ-4% студентов потока.',en:'Top-1 CS faculty in Russia. Top-4% of the cohort.'}},
-      {when:'2019 — 2023', h:{ru:'Математическая школа №179',en:'Math School №179'},
-       p:{ru:'Топ-3 математических школ страны. Мат. анализ, линейная алгебра, дискретная математика, мат. статистика, теория вероятностей.',
-          en:'Top-3 math school in Russia. Calculus, linear algebra, discrete math, statistics, probability.'}},
+  "education": {
+    "timeline": [
+      {
+        "when": {
+          "ru": "2023 — настоящее время",
+          "en": "2023 — present"
+        },
+        "h": {
+          "ru": "НИУ ВШЭ · Программная инженерия",
+          "en": "HSE University · Software Engineering"
+        },
+        "p": {
+          "ru": "Бакалавриат, факультет компьютерных наук. Средний балл — 8.89; топ-4% студентов потока. Участие в HSE Hack Club.",
+          "en": "Bachelor’s degree in progress, Faculty of Computer Science. Average grade: 8.89; top 4% of the cohort. Participated in HSE Hack Club."
+        }
+      },
+      {
+        "when": "2019 — 2023",
+        "h": {
+          "ru": "Математическая школа №179",
+          "en": "Math School No. 179"
+        },
+        "p": {
+          "ru": "Математическое образование и участие в олимпиадах.",
+          "en": "Mathematical education and participation in olympiads."
+        }
+      },
+      {
+        "when": "2016 — 2018",
+        "h": "Eastbourne College",
+        "p": {
+          "ru": "Летние стажировки.",
+          "en": "Summer internships."
+        }
+      }
     ],
-    olympiads:[
-      {m:'🏅', t:{ru:'Московская мат. олимпиада 2022 — призёр',en:'Moscow Math Olympiad 2022 — prize-winner'}},
-      {m:'🏅', t:{ru:'Олимпиада «Физтех» 2022 и 2023 — призёр',en:'Phystech Olympiad 2022 & 2023 — prize-winner'}},
-      {m:'🏆', t:{ru:'Хакатон «Код риска» (Сбер) 2026 — финалист',en:'Sber «Code of Risk» hackathon 2026 — finalist'}},
+    "olympiads": [
+      {
+        "m": "🥈",
+        "t": {
+          "ru": "Сбер · «Код риска» 2026 — серебряный призёр",
+          "en": "Sber · Risk Code 2026 — silver medalist"
+        }
+      },
+      {
+        "m": "🏅",
+        "t": {
+          "ru": "Московская математическая олимпиада 2022 — призёр",
+          "en": "Moscow Mathematical Olympiad 2022 — prize-winner"
+        }
+      },
+      {
+        "m": "🏅",
+        "t": {
+          "ru": "Олимпиада «Физтех» 2022 и 2023 — призёр",
+          "en": "Phystech Olympiad 2022 & 2023 — prize-winner"
+        }
+      }
     ],
-    courses:['Y Combinator Startup School · PM','VK · Product Management',
-      {ru:'ВШЭ · Интеллектуальный анализ данных',en:'HSE · Data Mining'},
-      {ru:'ВШЭ · Анализ данных на Python',en:'HSE · Data Analysis in Python'},'Kaggle · ML & Data Analytics'],
+    "courses": [
+      {
+        "ru": "Математический анализ",
+        "en": "Calculus"
+      },
+      {
+        "ru": "Линейная алгебра",
+        "en": "Linear algebra"
+      },
+      {
+        "ru": "Дискретная математика",
+        "en": "Discrete mathematics"
+      },
+      {
+        "ru": "Математическая статистика",
+        "en": "Mathematical statistics"
+      },
+      {
+        "ru": "Теория вероятностей",
+        "en": "Probability theory"
+      }
+    ]
   },
-  contacts:[
-    {key:'telegram', name:'Telegram', val:'@matveipasynkov', copy:'https://t.me/matveipasynkov', color:'#2aabee',
-     ic:'<path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>'},
-    {key:'email', name:'Email', val:'mepasynkov@edu.hse.ru', copy:'mepasynkov@edu.hse.ru', color:'#ff5f57',
-     ic:'<rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/>'},
-    {key:'phone', name:{ru:'Телефон',en:'Phone'}, val:'+7 (968) 997-90-19', copy:'+79689979019', color:'#28c840',
-     ic:'<path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z" fill="none" stroke="currentColor" stroke-width="2"/>'},
-    {key:'github', name:'GitHub', val:'/matveipasynkov', copy:'https://github.com/matveipasynkov', color:'#1c1c2e',
-     ic:'<path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.21.67.8.56A11.51 11.51 0 0023.5 12C23.5 5.73 18.27.5 12 .5z"/>'},
-  ],
+  "contacts": [
+    {
+      "key": "telegram",
+      "name": "Telegram",
+      "val": "@matveipasynkov",
+      "copy": "https://t.me/matveipasynkov",
+      "color": "#2aabee",
+      "ic": "<path d=\"M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z\"/>"
+    },
+    {
+      "key": "email",
+      "name": "Email",
+      "val": "mepasynkov@edu.hse.ru",
+      "copy": "mepasynkov@edu.hse.ru",
+      "color": "#ff5f57",
+      "ic": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/><path d=\"M3 7l9 6 9-6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/>"
+    },
+    {
+      "key": "phone",
+      "name": {
+        "ru": "Телефон",
+        "en": "Phone"
+      },
+      "val": "+7 (968) 997-90-19",
+      "copy": "+79689979019",
+      "color": "#28c840",
+      "ic": "<path d=\"M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0122 16.92z\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"/>"
+    },
+    {
+      "key": "github",
+      "name": "GitHub",
+      "val": "/matveipasynkov",
+      "copy": "https://github.com/matveipasynkov",
+      "color": "#1c1c2e",
+      "ic": "<path d=\"M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56v-2c-3.2.7-3.87-1.37-3.87-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.73 1.27 3.4.97.1-.75.41-1.27.74-1.56-2.55-.29-5.23-1.28-5.23-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 015.79 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.69 5.41-5.25 5.69.42.36.79 1.08.79 2.18v3.23c0 .31.21.67.8.56A11.51 11.51 0 0023.5 12C23.5 5.73 18.27.5 12 .5z\"/>"
+    },
+    {
+      "key": "linkedin",
+      "name": "LinkedIn",
+      "val": "Matthew Pasynkov",
+      "copy": "https://www.linkedin.com/in/matthew-pasynkov-60986b409/",
+      "color": "#0a66c2",
+      "ic": "<path d=\"M4 3a2 2 0 110 4 2 2 0 010-4zM2 9h4v13H2zM9 9h4v2c1-2 7-4 8 3v8h-4v-7c0-3-4-3-4 0v7H9z\"/>"
+    }
+  ]
 };
 
 const TABS=[
@@ -1325,9 +1588,9 @@ function openTerminal(){
       case 'neofetch': print(`<span class="ok">       .:'</span>        <span class="user">matvey</span>@<span class="host">hh.ru</span>
     <span class="ok">  :' '</span>         ---------
    <span class="ok">.'   '</span>        <span class="dim">OS</span>: macOS Sonoma (резюме)
-  <span class="ok">:    .'</span>        <span class="dim">Role</span>: Project Manager
+  <span class="ok">:    .'</span>        <span class="dim">Role</span>: ${L(DATA.profile.role)}
   <span class="ok">  .'</span>           <span class="dim">Team</span>: hh.ru — sales/analytics/IT
-   <span class="ok">  :</span>           <span class="dim">Stack</span>: SQL, Python, Power BI, Excel/VBA
+   <span class="ok">  :</span>           <span class="dim">Stack</span>: Python / Pandas, Excel, BI, Generative AI
                  <span class="dim">Edu</span>: НИУ ВШЭ (top-4%)
                  <span class="dim">Lang</span>: RU / EN (C1)`); break;
       case 'clear': term.innerHTML=''; break;
@@ -1833,8 +2096,8 @@ document.addEventListener('keydown',e=>{
           else print(`<span class="err">open: ${a||''}</span>`);break;}
         case 'whoami':print('matvey');break;
         case 'neofetch':print(`<span class="ok">matvey</span>@<span class="host">hh.ru</span>
-<span class="dim">Role</span>: Project Manager
-<span class="dim">Stack</span>: SQL, Python, Power BI
+<span class="dim">Role</span>: ${L(DATA.profile.role)}
+<span class="dim">Stack</span>: Python / Pandas, Excel, BI
 <span class="dim">Edu</span>: НИУ ВШЭ (top-4%)`);break;
         case 'clear':term.innerHTML='';break;
         case 'echo':print(escape(args.join(' ')));break;
@@ -1843,7 +2106,7 @@ document.addEventListener('keydown',e=>{
       }
       inputLine();
     }
-    print(`<span class="dim">${c('Введите help','Type help')}</span>`);
+    print(`<span class="dim">${L({ru:'Введите help',en:'Type help'})}</span>`);
     inputLine();
     term.addEventListener('click',()=>{const i=term.querySelector('.term-input:not([disabled])');if(i)i.focus();});
   }
