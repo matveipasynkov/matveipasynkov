@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="430" viewBox="0 0 1280 430" role="img" aria-labelledby="title desc">
-<title id="title">Matvey Pasynkov — Process optimization, business analysis, AI</title>
-<desc id="desc">HeadHunter. Software Engineering at HSE. Processes, data, impact.</desc>
-<rect width="1280" height="430" fill="#111210"/>
-<g stroke="#30352a" fill="none"><path d="M48 63H1232M48 369H1232M918 63V369"/><circle cx="1080" cy="210" r="94"/><ellipse cx="1080" cy="210" rx="125" ry="52" transform="rotate(-40 1080 210)"/><ellipse cx="1080" cy="210" rx="125" ry="52" transform="rotate(40 1080 210)" stroke="#d4fd55"/></g>
-<g font-family="Arial,Helvetica,sans-serif"><text x="48" y="40" fill="#d4fd55" font-size="15" letter-spacing="2">BUSINESS × ENGINEERING</text><text x="1232" y="40" text-anchor="end" fill="#a0a497" font-family="monospace" font-size="13">HEADHUNTER / HSE</text>
-<text x="43" y="196" fill="#f2f2e9" font-size="115" font-weight="800" letter-spacing="-7">MATVEY</text><text x="43" y="313" fill="#d4fd55" font-size="115" font-weight="800" letter-spacing="-7">PASYNKOV<tspan font-size="75">.</tspan></text>
-<text x="48" y="403" fill="#a0a497" font-size="15" letter-spacing="1">PROCESS OPTIMIZATION / BUSINESS ANALYSIS / AI AUTOMATION</text>
-<text x="1232" y="403" text-anchor="end" fill="#d4fd55" font-family="monospace" font-size="13">EXPLORE ↓</text></g>
-<circle cx="1080" cy="210" r="42" fill="#d4fd55"/><path d="M1062 228l36-36m-29 0h29v29" stroke="#111210" stroke-width="5" fill="none"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="520" viewBox="0 0 1280 520" role="img" aria-labelledby="title"><title id="title">Matvey Pasynkov — Business × Engineering. Processes. Data. Impact.</title><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#d4fd55" stroke-opacity=".08"/></pattern><clipPath id="right"><rect x="880" y="72" width="400" height="366"/></clipPath></defs>
+<rect width="1280" height="520" fill="#111210"/><path d="M36 70H1244M880 70V440" stroke="#363c2b"/>
+<g font-family="monospace" font-size="17" letter-spacing="1.5"><text x="38" y="43" fill="#d4fd55">BUSINESS × ENGINEERING</text><text x="1240" y="43" fill="#a0a497" text-anchor="end">MATVEY PASYNKOV / PROFILE</text></g>
+<g clip-path="url(#right)"><rect x="880" y="72" width="400" height="366" fill="url(#grid)"/><g fill="none" stroke="#d4fd55" stroke-width="1"><circle cx="1100" cy="248" r="146" opacity=".7"/><circle cx="1100" cy="248" r="180" stroke-dasharray="2 12" opacity=".35"/><ellipse cx="1100" cy="248" rx="196" ry="69" transform="rotate(-40 1100 248)" opacity=".8"/><ellipse cx="1100" cy="248" rx="196" ry="69" transform="rotate(40 1100 248)" opacity=".3"/></g><circle cx="1100" cy="248" r="47" fill="#d4fd55"/><g transform="translate(1066 214) scale(2.8)" color="#111210"><path d="M5 4h15v15h-2V7.414L5.707 19.707 4.293 18.293 16.586 6H5Z" fill="currentColor"/></g><circle cx="1100" cy="102" r="4" fill="#d4fd55"/></g>
+<g font-family="Arial,Helvetica,sans-serif" font-size="137" font-weight="800" letter-spacing="-8"><text x="33" y="226" fill="#f2f2e9">MATVEY</text><text x="33" y="361" fill="#d4fd55">PASYNKOV.</text></g>
+<text x="40" y="411" fill="#a0a497" font-family="monospace" font-size="18" letter-spacing="1">PROCESSES. DATA. IMPACT.</text>
+<rect y="452" width="1280" height="68" fill="#d4fd55"/><g fill="#111210" font-family="Arial,sans-serif" font-size="21" font-weight="700"><text x="38" y="494">PROCESS OPTIMIZATION</text><text x="446" y="494">BUSINESS ANALYSIS</text><text x="851" y="494">AI AUTOMATION</text></g>
+<g stroke="#111210" stroke-width="2"><path d="M380 474v25m-12-12h24m393-13v25m-12-12h24"/></g></svg>

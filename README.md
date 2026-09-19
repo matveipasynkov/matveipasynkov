@@ -9,6 +9,10 @@
   <a href="mailto:mepasynkov@edu.hse.ru"><img src="assets/readme/email.svg" width="145" alt="Email"></a>
 </p>
 
+<p align="center">
+  <a href="#approach">01 / Approach</a> &nbsp; · &nbsp; <a href="#experience">02 / Experience</a> &nbsp; · &nbsp; <a href="#toolkit">03 / Toolkit</a> &nbsp; · &nbsp; <a href="#foundation">04 / Foundation</a>
+</p>
+
 <br>
 
 ## Business context. Engineering mindset.
@@ -26,7 +30,10 @@ I explore how teams work, find what can be improved, and build tools to help the
 
 <br>
 
-## 01 / How I work
+<a id="approach"></a>
+<img src="assets/readme/approach.svg" width="100%" alt="01 / How I work">
+
+<br>
 
 <img src="assets/readme/workflow.svg" width="100%" alt="Understand the process → Form a hypothesis → Create a prototype → Test and improve.">
 
@@ -34,14 +41,14 @@ I explore how teams work, find what can be improved, and build tools to help the
 <tr>
 <td width="50%" valign="top">
 
-### ↗ Processes & people
+### 01 — Processes & people
 
 Understand workflows, identify opportunities, and work with **sales, analysts, IT, and related teams** to move initiatives forward.
 
 </td>
 <td width="50%" valign="top">
 
-### ✳ Tools & automation
+### 02 — Tools & automation
 
 Build **internal tools and simple prototypes**. Use generative AI to automate business processes and test new ideas.
 
@@ -50,14 +57,14 @@ Build **internal tools and simple prototypes**. Use generative AI to automate bu
 <tr>
 <td width="50%" valign="top">
 
-### ⌘ Data & decisions
+### 03 — Data & decisions
 
 Analyze data with **Python / Pandas and Excel**. Turn findings into BI dashboards, visualizations, and materials teams can use.
 
 </td>
 <td width="50%" valign="top">
 
-### → Projects & delivery
+### 04 — Projects & delivery
 
 Manage projects **end to end**, connect business context with implementation, and coordinate work across teams.
 
@@ -67,7 +74,14 @@ Manage projects **end to end**, connect business context with implementation, an
 
 <br>
 
-## 02 / Where I’ve done it
+<a id="experience"></a>
+<img src="assets/readme/experience.svg" width="100%" alt="02 / Where I’ve done it">
+
+<br>
+
+<table>
+<tr>
+<td width="50%" valign="top">
 
 ### HeadHunter <sup>NOW</sup>
 
@@ -79,6 +93,9 @@ Moscow · Hybrid
 - Develop internal tools, dashboards, and visualizations.
 - Manage projects end to end with sales, analytics, IT, and related teams.
 
+</td>
+<td width="50%" valign="top">
+
 ### OKKAM GROUP
 
 **Business Analyst** · `Apr 2025 — Jun 2026`  
@@ -88,9 +105,16 @@ Formerly dentsu Russia · Moscow
 - Automated business processes using generative AI.
 - Analyzed data with Excel and Python / Pandas, and worked with BI dashboards.
 
+</td>
+</tr>
+</table>
+
 <br>
 
-## 03 / My toolkit
+<a id="toolkit"></a>
+<img src="assets/readme/toolkit.svg" width="100%" alt="03 / My toolkit">
+
+<br>
 
 | `DATA & INSIGHT` | `PROCESSES & AUTOMATION` | `PRODUCT & DELIVERY` |
 | :--- | :--- | :--- |
@@ -101,7 +125,10 @@ Formerly dentsu Russia · Moscow
 
 <br>
 
-## 04 / The foundation
+<a id="foundation"></a>
+<img src="assets/readme/foundation.svg" width="100%" alt="04 / The foundation">
+
+<br>
 
 **HSE University · Faculty of Computer Science**  
 BSc in Software Engineering · `2023 — present`  
