@@ -74,6 +74,30 @@ Manage projects **end to end**, connect business context with implementation, an
 
 <br>
 
+<a id="result"></a>
+
+## A result in practice
+
+### Commercial proposals: from ~1 hour to 10 minutes
+
+| Before | After |
+| :--- | :--- |
+| **~60 min** per client | **Up to 10 min** per client |
+| Manually assembled SMB proposals | Automatically retrieved data, recommendation prompts, and several suitable packages |
+
+I built a commercial proposal builder that retrieves most of the required client data, suggests recommendations through data-based rules, and assembles several packages to address the client’s needs. The solution is in high demand.
+
+<details>
+<summary><strong>RU / Конструктор коммерческих предложений</strong></summary>
+
+Раньше сотрудники вручную собирали КП для МСБ, тратя около часа на клиента. Я создал конструктор, который автоматически подтягивает большую часть данных, подсказывает менеджеру, что можно рекомендовать, и формирует несколько подходящих пакетов.
+
+**Результат: до 10 минут на клиента вместо примерно часа.** Решение пользуется высоким спросом.
+
+</details>
+
+<br>
+
 <a id="experience"></a>
 <img src="assets/readme/experience.svg" width="100%" alt="02 / Where I’ve done it">
 
